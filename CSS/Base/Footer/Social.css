@@ -19,6 +19,6 @@
 	transition: all ease-out 0.3s
 }
 
-#site-twitter:hover path, #site-facebook:hover path, #site-youtube:hover #lozenge path {
+#site-twitter:hover path, #site-facebook:hover path, #site-gplus:hover span>svg>path, #site-youtube:hover #lozenge path {
 	fill: #56b4d1
 }

@@ -1,5 +1,4 @@
 .content-list>li {
-	font-size: 15px;
 	background-color: transparent;
 	vertical-align: baseline;
 	padding-bottom: 14px
@@ -10,7 +9,7 @@
 }
 
 .content-li-title {
-	font-size: x-large;
+	font-size: larger;
 	font-weight: bold;
 	padding-bottom: 4px;
 	color: #69b7cf!important

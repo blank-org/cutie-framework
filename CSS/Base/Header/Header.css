@@ -38,7 +38,7 @@
 	visibility: hidden
 }
 
-span#download_button {
+span#header_buttons_right {
 	margin: 0;
 	float: right;
 	text-align: right

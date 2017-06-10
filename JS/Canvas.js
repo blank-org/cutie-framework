@@ -51,13 +51,14 @@ function loadCanvas(target, title) {
 					var resp = JSON.parse(xmlhttp.responseText);
 					document.title = resp.desc + ' - ' + PROJECT_TITLE;
 					if(target == 'root') {
-						document.getElementById('path').innerHTML = '&nbsp;';
-						document.getElementById('title').innerHTML = '&nbsp;';
 						classie.add(document.getElementById('title'), 'hide_scale');
+						document.getElementById('path').innerHTML = '';
+						document.getElementById('title').innerHTML = '';
 					}
 					else {
 						document.getElementById('path').innerHTML = resp.path;
 						document.getElementById('title').innerHTML = title;
+						classie.remove(document.getElementById('title'), 'hide_scale');
 					}
 					syncScrollReload(startTime, resp, target);
 				} break;
@@ -145,6 +146,6 @@ function getTimeOutDuration(elapsed) {
 		if(timeout < 0)
 			return 0;
 		else
-			return timeout;		
+			return timeout;
 	}
 }

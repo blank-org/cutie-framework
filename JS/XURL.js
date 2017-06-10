@@ -1,4 +1,3 @@
-
 function getURLid() {
 	var loc = window.location.pathname;
 	if(loc == '/')

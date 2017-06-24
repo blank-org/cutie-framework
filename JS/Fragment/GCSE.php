@@ -1,6 +1,6 @@
 <script>
 	function gcse_init() {
-		var cx = '<?php echo $config['google_cse_id'] ?>:wbstdw_wxuc';
+		var cx = '<?php echo $config['google_cse_id'] ?>';
 		var gcse = document.createElement('script');
 		gcse.type = 'text/javascript';
 		gcse.async = true;

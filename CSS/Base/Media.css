@@ -15,8 +15,8 @@
 		margin: 0 15px
 	}
 
-	.content p {
-		padding-left: 6px
+	#content p {
+		padding-left: 5px
 	}
 
 	#nav-menu-prev,#nav-menu-next {

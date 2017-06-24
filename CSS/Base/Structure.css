@@ -7,7 +7,7 @@
 }
 
 #header-wrapper {
-	height: 134px;
+	height: 142px;
 	top: 0;
 	left: 24px;
 	right: 24px;
@@ -18,8 +18,6 @@
 
 #header-wrapper-divider {
 	border-bottom: 1px solid #ddd;
-	margin-left: auto;
-	margin-right: auto
 }
 
 #wrapper {

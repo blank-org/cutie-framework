@@ -44,5 +44,9 @@
 		}
 	],
 	"start_url": "/",
-	"display": "standalone"
+	"display": "standalone",
+	"related_applications": [{
+		"platform": "web",
+		"url": "<?php echo $config['base_url'] ?>"
+	}]
 }

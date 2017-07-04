@@ -27,13 +27,13 @@
 	$desc = getComponentDesc($id);
 	$date = getFileDate(getComponentPath($id));
 
-	$dom = new DOMDocument();
+	// $dom = new DOMDocument();
 
-	//ob_start();
+	// ob_start();
 	require '..\..\HTML\Template\Base.php';
-	//$dom->loadHTML(ob_get_contents());
-	//ob_end_clean();
+	// $dom->loadHTML(ob_get_contents());
+	// ob_end_clean();
 
-	//AddAttribute(($dom->getElementById($id)), "class", "sidebar-nav-high");
-	//echo $dom->saveHTML();
+	// AddAttribute(($dom->getElementById($id)), "class", "sidebar-nav-high");
+	// echo $dom->saveHTML();
 ?>

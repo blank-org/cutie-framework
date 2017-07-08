@@ -15,12 +15,12 @@
 	};
 
 	function item($target, $title) {
-?><a class='XURL block' href='/<?php echo url_part($target) ?>' data-target='<?php echo $target ?>' data-title='<?php echo $title ?>'><div><?php echo title_label($title) ?></div></a><?php
+?><a class='XURL item_block' href='/<?php echo url_part($target) ?>' data-target='<?php echo $target ?>' data-title='<?php echo $title ?>'><div><?php echo title_label($title) ?></div></a><?php
 	}
 
 	function placeholder($count) {
 		while ($count--) {
-?><div class='sidebar-nav-norm placeholder-empty'></div><?php
+?><div class='sidebar-nav-norm item_block-placeholder'></div><?php
 		}
 	}
 

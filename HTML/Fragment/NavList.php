@@ -13,8 +13,7 @@
 		class='item_block-disabled sidebar-nav-norm sidebar-nav-l-1' >
 		&nbsp;
 	<?php } ?>
-	</a>
-	<a id='nav-menu-next'
+	</a><a id='nav-menu-next'
 	<?php if($nextId != "") {?>
 		class='XURL item_block' href='<?php echo "/".$nextId ?>' data-target='<?php echo $nextId ?>' data-title='<?php echo getComponentTitle($nextId) ?>' >
 		<div><?php echo getComponentTitle($nextId) ?></div><div class='arrow'>&#x25B7;</div>
@@ -23,8 +22,7 @@
 		class='item_block-disabled sidebar-nav-norm sidebar-nav-l-1' >
 		&nbsp;
 	<?php } ?>
-	</a>
-	<a id='nav-menu-up' class='XURL item_block <?php if($parentId == "root") echo 'center center-arrow'?>' href='<?php echo "/".$parentId ?>' data-target='<?php echo $parentId ?>' data-title='<?php echo getComponentTitle($parentId) ?>'>
+	</a><a id='nav-menu-up' class='XURL item_block <?php if($parentId == "root") echo 'center center-arrow'?>' href='<?php echo "/".$parentId ?>' data-target='<?php echo $parentId ?>' data-title='<?php echo getComponentTitle($parentId) ?>'>
 		<div><?php if($parentId != "root") echo getComponentTitle($parentId); ?></div><div class='arrow'>&#x25B3;</div>
 	</a>
 </div>

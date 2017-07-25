@@ -1,6 +1,6 @@
 #translate-button, #search-button {
 	display: inline-block;
-	margin: 11px 5px
+	margin: 12px 5px
 }
 
 #translate-button:hover svg, #search-button:hover svg {

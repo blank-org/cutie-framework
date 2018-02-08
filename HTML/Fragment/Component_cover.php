@@ -5,6 +5,10 @@
 		$ext = 'jpg';
 		$imageFileName = '../../Resource/'.$id.'.'.'jpg';
 	}
+	else if(file_exists('../../Resource/'.$id.'.'.'png')) {
+		$ext = 'png';
+		$imageFileName = '../../Resource/'.$id.'.'.'png';
+	}
 	else if(file_exists('../../Resource/'.$id.'.'.'svg')) {
 		$ext = 'svg';
 		$imageFileName = '../../Resource/'.$id.'.'.'svg';
@@ -12,6 +16,10 @@
 	else if(file_exists('../../Resource/'.$id.'/'.'Index'.'.'.'jpg')) {
 		$ext = 'jpg';
 		$imageFileName = '../../Resource/'.$id.'/'.'Index'.'.'.'jpg';
+	}
+	else if(file_exists('../../Resource/'.$id.'/'.'Index'.'.'.'png')) {
+		$ext = 'png';
+		$imageFileName = '../../Resource/'.$id.'/'.'Index'.'.'.'png';
 	}
 	else if(file_exists('../../Resource/'.$id.'/'.'index'.'.'.'svg')) {
 		$ext = 'svg';

@@ -143,4 +143,30 @@ function getNextId($id) {
 	exit_404("Wrong ID"." : ".$id);
 }
 
+function getComponentMetaImage($id) {
+	$imageFileName;
+	if(file_exists('../../Resource/'.$id.'.'.'jpg')) {
+		$imageFileName = 'resource/'.$id.'.'.'jpg';
+	}
+	else if(file_exists('../../Resource/'.$id.'.'.'png')) {
+		$imageFileName = 'resource/'.$id.'.'.'png';
+	}
+	else if(file_exists('../../Resource/'.$id.'.'.'svg')) {
+		$imageFileName = 'resource/'.$id.'.'.'svg';
+	}
+	else if(file_exists('../../Resource/'.$id.'/'.'Index'.'.'.'jpg')) {
+		$imageFileName = 'resource/'.$id.'/'.'index'.'.'.'jpg';
+	}
+	else if(file_exists('../../Resource/'.$id.'/'.'Index'.'.'.'png')) {
+		$imageFileName = 'resource/'.$id.'/'.'index'.'.'.'png';
+	}
+	else if(file_exists('../../Resource/'.$id.'/'.'Index'.'.'.'svg')) {
+		$imageFileName = 'resource/'.$id.'/'.'index'.'.'.'svg';
+	}
+	else {
+		$imageFileName = "icon-social.png";
+	}
+	return $imageFileName;
+}
+
 ?>

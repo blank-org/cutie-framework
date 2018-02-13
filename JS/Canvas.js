@@ -119,7 +119,7 @@ function executeReload(startTime, resp, target) {
 	reloadTimeout = setTimeout( function() {
 		var canvas_main = document.getElementById('canvas-main');
 		var main_wrapper = document.getElementById('main-wrapper');
-		content.innerHTML = resp.content;
+		document.getElementById('content').innerHTML = resp.content;
 		classie.remove(canvas_main, 'hide');
 		document.getElementById('date').innerHTML = resp.date;
 		if(!URLid == '') {

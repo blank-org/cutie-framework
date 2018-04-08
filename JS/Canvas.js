@@ -108,6 +108,7 @@ function syncScrollReload(startTime, resp, target) {
 		syncScrollReload.startTime = startTime;
 		syncScrollReload.resp = resp;
 		syncScrollReload.target = target;
+		activateMainFn();
 	}
 	if(typeof syncScrollReload.startTime != 'undefined' && syncScrollReload.startTime != null && !scrollActive)
 		executeReload(syncScrollReload.startTime, syncScrollReload.resp, syncScrollReload.target);

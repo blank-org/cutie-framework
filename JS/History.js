@@ -4,6 +4,5 @@ window.onpopstate = function(e) { //window.addEventListener('popstate', function
 			activateMenuFn();
 		else {
 			loadCanvas(e.state.id, e.state.title);
-			activateMainFn();
 		}
 }

@@ -30,6 +30,11 @@ function loadCanvas(target, title) {
 	syncScrollReload.startTime = null;
 	scrollTop();
 	initLoading();
+	if(target == 'root')
+		classie.add(document.getElementById('title'), 'hide_scale');
+	else
+		classie.remove(document.getElementById('title'), 'hide_scale');
+	classie.add(document.getElementById('title'), 'hide');
 
 	var xmlhttp = new XMLHttpRequest();
 	if(window.XMLHttpRequest) {
@@ -49,16 +54,10 @@ function loadCanvas(target, title) {
 
 					var resp = JSON.parse(xmlhttp.responseText);
 					document.title = resp.desc + ' - ' + PROJECT_TITLE;
-					if(target == 'root') {
-						classie.add(document.getElementById('title'), 'hide_scale');
-						document.getElementById('path').innerHTML = '';
-						document.getElementById('title').innerHTML = '';
-					}
-					else {
-						document.getElementById('path').innerHTML = resp.path;
-						document.getElementById('title').innerHTML = title;
-						classie.remove(document.getElementById('title'), 'hide_scale');
-					}
+					if(target == 'root')
+						updatePathTitle('', '');
+					else
+						updatePathTitle(resp.path, title);
 					syncScrollReload(startTime, resp, target);
 				} break;
 				case 404: {
@@ -142,4 +141,12 @@ function getTimeOutDuration(elapsed) {
 		return 0;
 	else
 		return timeout;
+}
+
+function updatePathTitle(path, title) {
+	setTimeout(function() {
+		document.getElementById('path').innerHTML = path;
+		document.getElementById('title').innerHTML = title;
+		classie.remove(document.getElementById('title'), 'hide');
+	}, 300);
 }

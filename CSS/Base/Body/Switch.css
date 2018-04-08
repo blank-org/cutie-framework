@@ -6,7 +6,7 @@
 	transition: all 0.3s;
 }
 
-#canvas-main.hide {
+.pml-open #canvas-main.hide {
 	transition: 0s !important;
 }
 

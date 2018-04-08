@@ -6,6 +6,10 @@
 	transition: all 0.3s;
 }
 
+#canvas-main.hide {
+	transition: 0s !important;
+}
+
 .hide_scale {
   transform: scaleY(0);
 }

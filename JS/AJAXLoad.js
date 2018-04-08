@@ -35,11 +35,11 @@ function errorLoading() {
 	clearTimeout(notification_intrvl); // ensure single timer
 	notification_intrvl = setInterval(function() {
 		document.getElementById("notification").classList.add('hide');
-	},3000);
+	}, 3000);
 }
 
 function fbReload() {
 	try{
 		FB.XFBML.parse();
-	}catch(ex){}
+	}catch(ex) {};
 }

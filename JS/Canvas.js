@@ -90,7 +90,7 @@ function scrollTop() {
 	scrollActive = true;
 	var y = window.scrollY;
 	var dy = 100;
-	var scrollInterval = setInterval(function(){
+	var scrollInterval = setInterval(function() {
 		window.scrollTo(0, y);
 		if(y <= 0) {
 			clearInterval(scrollInterval);

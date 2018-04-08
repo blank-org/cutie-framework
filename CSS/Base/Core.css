@@ -43,13 +43,13 @@ body {
 	color: #69b7cf!important
 }
 
-.content-link-grey {
+.content-link-gray {
 	text-decoration: none;
 	color: #bbbbbb!important;
 	transition: all ease-out 0.3s;
 }
 
-.content-link-grey:hover {
+.content-link-gray:hover {
 	text-decoration: none;
 	color: #69b7cf!important
 }

@@ -137,15 +137,9 @@ function executeReload(startTime, resp, target) {
 }
 
 function getTimeOutDuration(elapsed) {
-	if(transitionFromMenu) {
-		transitionFromMenu = false;
+	timeout = 380 - elapsed;
+	if(timeout < 0)
 		return 0;
-	}
-	else {
-		timeout = 350 - elapsed;
-		if(timeout < 0)
-			return 0;
-		else
-			return timeout;
-	}
+	else
+		return timeout;
 }

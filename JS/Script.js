@@ -26,10 +26,7 @@ var activateMenuFn = function() {
 	}
 }
 
-var transitionFromMenu;
 var activateMainFn = function() {
-	if(menuActive)
-		transitionFromMenu = true;
 	var main_wrapper = document.querySelector( '#main-wrapper' ),
 		menu_button = document.querySelector( '#menu-button' );
 	classie.remove( main_wrapper, 'pml-open' );

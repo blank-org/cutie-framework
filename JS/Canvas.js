@@ -26,7 +26,6 @@ function loadCanvas(target, title) {
 	classie.add(main_wrapper, 'hide_path_title_updated');
 	classie.add(canvas_main, 'hide');
 
-	//canvas_main.innerHTML = '';
 	var startTime = new Date().getTime();
 	syncScrollReload.startTime = null;
 	scrollTop();

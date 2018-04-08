@@ -1,6 +1,5 @@
 // external PROJECT_TITLE
 var curTab;
-var intrvl = 0;
 var gTarget;
 var URLid;
 

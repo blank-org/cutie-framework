@@ -30,7 +30,7 @@ function loadCanvas(target, title) {
 	var startTime = new Date().getTime();
 	syncScrollReload.startTime = null;
 	scrollTop();
-	beginLoading();
+	initLoading();
 
 	var xmlhttp = new XMLHttpRequest();
 	if(window.XMLHttpRequest) {

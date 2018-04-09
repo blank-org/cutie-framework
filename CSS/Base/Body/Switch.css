@@ -10,7 +10,7 @@
 	transition: 0s !important;
 }
 
-.hide_scale#title-container {
+.hide_scale#title-container, .hide_scale#path-container {
   transform: scaleY(0);
 	transition: all 0.3s;
 	max-height: 0px !important;

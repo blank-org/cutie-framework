@@ -1,9 +1,12 @@
 div#title-container {
-	text-align: center
+	text-align: center;
+	transition: all 0.3s;
+	will-change: opacity, scaleY;
+	max-height: 58px;
 }
 
 h1#title {
 	display: inline-block;
 	transition: all 0.3s;
-	will-change: opacity
+	will-change: opacity, scaleY;
 }

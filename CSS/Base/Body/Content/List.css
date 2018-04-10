@@ -1,3 +1,7 @@
+.content-list {
+	padding-left: 16px;
+}
+
 .content-list>li {
 	background-color: transparent;
 	vertical-align: baseline;
@@ -30,6 +34,6 @@ ul.list-bullet li:before {
 	padding-right: 7px
 }
 
-ul.content-list-2 {
+ul.content-list-2, ol.content-list-2 {
 	padding-left: 10px
 }

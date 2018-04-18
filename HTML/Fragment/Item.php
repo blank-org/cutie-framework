@@ -1,27 +1,14 @@
 <?php
-	require_once 'Fragment\link.php';
+	require_once 'Fragment\Link.php';
+	require_once 'Fragment\Item_text.php';
+	require_once 'Fragment\Item_image.php';
 
-	function group($max_count, ...$list_items) {
-?>
-<div class='sidebar-nav-group'>
-<?php
-		foreach ($list_items as $list_item) {
-			item($list_item[0], $list_item[1]);
-		}
-		placeholder( $max_count - 1 );
-?>
-</div>
-<?php
-	};
-
-	function item($target, $title) {
-?><a class='XURL item_block' href='/<?php echo url_part($target) ?>' data-target='<?php echo $target ?>' data-title='<?php echo $title ?>'><div><?php echo title_label($title) ?></div></a><?php
-	}
-
-	function placeholder($count) {
-		while ($count--) {
-?><div class='sidebar-nav-norm item_block-placeholder'></div><?php
+	function placeholder($max_count, $nItems) {
+		if($max_count) {
+			$count = ($max_count - $nItems % $max_count) % $max_count;
+			while ($count--) {
+				?><div class='sidebar-nav-norm item_block-placeholder'></div><?php
+			}
 		}
 	}
-
 ?>

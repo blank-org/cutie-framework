@@ -54,3 +54,11 @@ body {
 	text-decoration: none;
 	color: #69b7cf!important
 }
+
+.grow {
+	transition: 0.5s;
+}
+
+.grow:hover {
+	transform: scale(1.1);	
+}

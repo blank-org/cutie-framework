@@ -1,3 +1,9 @@
+@media (max-width: 354px) {
+	#nav-list.page-list > .item_block_container {
+		float: none;
+	}
+}
+
 @media (max-width: 540px) {
 	
 	#main-wrapper {
@@ -20,10 +26,22 @@
 		padding-left: 5px
 	}
 
-	#nav-menu-prev,#nav-menu-next {
-		float: none!important
+	#nav-list {
+		max-width: 354px;
 	}
-
+	
+	#nav-list.page-list > .item_block_container {
+		margin: 10px 6px;
+	}
+	
+	.item_block-disabled {
+		display: none;
+	}
+	
+	.sidebar-nav-group {
+		margin-bottom: 10px !important;
+	}
+	
 	#fb_components {
 		margin-left: 4px!important
 	}

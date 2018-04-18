@@ -13,13 +13,13 @@
 }
 
 #menu-button:hover path {
-	fill: #56b4d1
+	fill: #56b4d1;
 }
 
 #menu-button:hover {
-	cursor: pointer
+	cursor: pointer;
 }
 
 #menu-button.active path {
-	fill: #56b4d1
+	fill: #56b4d1;
 }

@@ -5,18 +5,18 @@
 .content-list>li {
 	background-color: transparent;
 	vertical-align: baseline;
-	padding-bottom: 14px
+	padding-bottom: 14px;
 }
 
-.content-list-2>li {
-	padding-bottom: 8px
+.content-list-2 > li {
+	padding-bottom: 8px;
 }
 
 .content-li-title {
 	font-size: larger;
 	font-weight: bold;
 	padding-bottom: 4px;
-	color: #69b7cf!important
+	color: #69b7cf !important;
 }
 
 ul.list-bullet {
@@ -35,5 +35,5 @@ ul.list-bullet li:before {
 }
 
 ul.content-list-2, ol.content-list-2 {
-	padding-left: 10px
+	padding-left: 10px;
 }

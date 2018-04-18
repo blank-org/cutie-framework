@@ -5,7 +5,7 @@
 	}
 	
 	function title_label($title) {
-		return ($title == '')? '\\' : $title;		
+		return ($title == '')? 'home' : $title;		
 	}
 
 	function link_xurl($target, $title) {

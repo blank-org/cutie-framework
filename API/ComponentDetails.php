@@ -67,9 +67,14 @@ function getSubComponents($id) {
 
 	$pattern = "#".$id."\/[^\/]+$#";
 	$matches = array_filter($component, function($a) use($pattern)  {
-    return preg_grep($pattern, $a);
+		return preg_grep($pattern, $a);
 	});
-	return $matches;
+	
+	$ary = [];
+	foreach ($matches as $key => $value) {
+		array_push($ary, array($value[0], $value[1]));
+	}	
+	return $ary;
 }
 
 function getComponentPath($id) {
@@ -143,30 +148,65 @@ function getNextId($id) {
 	exit_404("Wrong ID"." : ".$id);
 }
 
-function getComponentMetaImage($id) {
-	$imageFileName;
+function getComponentImage($id) {
+	$bIndex;
+	$ext;
 	if(file_exists('../../Resource/'.$id.'.'.'jpg')) {
-		$imageFileName = 'resource/'.$id.'.'.'jpg';
+		$ext = 'jpg';
+		$bIndex = false;
 	}
 	else if(file_exists('../../Resource/'.$id.'.'.'png')) {
-		$imageFileName = 'resource/'.$id.'.'.'png';
+		$ext = 'png';
+		$bIndex = false;
 	}
 	else if(file_exists('../../Resource/'.$id.'.'.'svg')) {
-		$imageFileName = 'resource/'.$id.'.'.'svg';
+		$ext = 'svg';
+		$bIndex = false;
 	}
 	else if(file_exists('../../Resource/'.$id.'/'.'Index'.'.'.'jpg')) {
-		$imageFileName = 'resource/'.$id.'/'.'index'.'.'.'jpg';
+		$ext = 'jpg';
+		$bIndex = true;
 	}
 	else if(file_exists('../../Resource/'.$id.'/'.'Index'.'.'.'png')) {
-		$imageFileName = 'resource/'.$id.'/'.'index'.'.'.'png';
+		$ext = 'png';
+		$bIndex = true;
 	}
-	else if(file_exists('../../Resource/'.$id.'/'.'Index'.'.'.'svg')) {
-		$imageFileName = 'resource/'.$id.'/'.'index'.'.'.'svg';
+	else if(file_exists('../../Resource/'.$id.'/'.'index'.'.'.'svg')) {
+		$ext = 'svg';
+		$bIndex = true;
 	}
 	else {
-		$imageFileName = "icon-social.png";
+		return null;
 	}
-	return $imageFileName;
+		
+	$arr = [];
+	$arr['file_path'] = '../../Resource/'.$id.($bIndex? '/'.'Index' : NULL).'.'.$ext;
+	$arr['url_path'] = $id.($bIndex? '/'.'index' : NULL).'.'.$ext;
+	$arr['ext'] = $ext;
+	
+	return $arr;
+}
+
+function getComponentMetaImage($id) {
+	$imageFile = getComponentImage($id);
+	if ($imageFile != null)
+		return $imageFile['url_path'];
+	else
+		return "icon-social.png";
+}
+
+function getItemImageFilePath($id) {
+	$imageFile = getComponentImage($id);
+	if($imageFile != null)
+		return $imageFile['file_path'];
+}
+
+function getItemImageFileURL($id) {
+	$imageFile = getComponentImage($id);
+	if($imageFile != null)
+		return '/'.$imageFile['url_path'];
+	else
+		return "/resource/placeholder.svg";
 }
 
 ?>

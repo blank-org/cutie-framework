@@ -18,6 +18,9 @@ function setXURL(node) {
 	var arClassElement = getElementsByClassName(node, 'XURL');
 	var n = arClassElement.length;
 	for(i = 0; i < n; i++) {
-		arClassElement[i].onclick = loadCanvasI;
+		if(arClassElement[i].getAttribute('data-target') == 'menu')
+			arClassElement[i].onclick = activateMenu;
+		else
+			arClassElement[i].onclick = loadCanvasI;
 	}
 }

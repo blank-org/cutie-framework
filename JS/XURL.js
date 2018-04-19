@@ -18,7 +18,6 @@ function setXURL(node) {
 	var arClassElement = getElementsByClassName(node, 'XURL');
 	var n = arClassElement.length;
 	for(i = 0; i < n; i++) {
-		var a = arClassElement[i].children[0];
 		arClassElement[i].onclick = loadCanvasI;
 	}
 }

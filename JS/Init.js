@@ -35,8 +35,7 @@ window.onload = function() {
 
 	menu_button.addEventListener( 'click', function() {
 		if (!menuActive) {
-			window.history.pushState({'id':'menu'}, '', '/'+'menu');
-			activateMenuFn();
+			activateMenu();
 		}
 		else {
 			if(curTab == 'root' || curTab == 'menu')

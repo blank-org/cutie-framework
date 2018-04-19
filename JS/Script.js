@@ -25,6 +25,11 @@ var activateMenuFn = function() {
 	}
 }
 
+var activateMenu = function() {
+	window.history.pushState({'id':curTab}, '', '/'+curTab);
+	activateMenuFn();
+}
+
 var activateMainFn = function() {
 	var main_wrapper = document.querySelector( '#main-wrapper' ),
 		menu_button = document.querySelector( '#menu-button' );
@@ -33,3 +38,9 @@ var activateMainFn = function() {
 	classie.remove( menu_button, 'active' );
 	menuActive = false;
 }
+
+var activateMain = function() {
+	window.history.pushState({'id':curTab}, '', '/'+curTab);
+	activateMainFn();	
+}
+

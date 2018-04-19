@@ -37,6 +37,10 @@ ul.list-bullet li {
 	color: #c8c8c8 !important;
 }
 
+ol.list-bullet li {
+	color: #a8a8a8 !important;
+}
+
 ul.list-bullet > li > div, ol.list-bullet > li > div {
 	color: #5a5a5a;
 }

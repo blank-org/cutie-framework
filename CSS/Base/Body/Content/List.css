@@ -53,3 +53,7 @@ ul.list-bullet li, ol.list-bullet li {
 ul.content-list-2, ol.content-list-2 {
 	padding-left: 10px;
 }
+
+.content-list-no-style {
+	list-style: none !important;
+}

@@ -132,8 +132,7 @@ function executeReload(startTime, resp, target) {
 		var height = document.getElementById('canvas-main').scrollHeight;
 		document.getElementById('nav-menu').style.maxHeight = height+'px';
 		document.getElementById('canvas-main').style.maxHeight = null;
-		if(resp.xurl == '1')
-			setXURL(document);
+		setXURL(document);
 		if(resp.async == '1')
 			initPageFunction(target);
 		fbReload();

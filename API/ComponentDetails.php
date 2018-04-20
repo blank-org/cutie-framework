@@ -40,16 +40,7 @@ function getComponentDesc($id) {
 
 	for($i = 0; $i < count($component); $i++)
 		if($component[$i][0] == $id)
-			return $component[$i][4];
-	exit_404("Wrong ID"." : ".$id);
-}
-
-function getComponentModeXURL($id) {
-	global $component;
-
-	for($i = 0; $i < count($component); $i++)
-		if($component[$i][0] == $id)
-			return $component[$i][2];
+			return $component[$i][3];
 	exit_404("Wrong ID"." : ".$id);
 }
 
@@ -58,7 +49,7 @@ function getComponentModeASYNC($id) {
 
 	for($i = 0; $i < count($component); $i++)
 		if($component[$i][0] == $id)
-			return $component[$i][3];
+			return $component[$i][2];
 	exit_404("Wrong ID"." : ".$id);
 }
 

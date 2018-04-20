@@ -64,11 +64,6 @@
 	echo "\"path\":";
 	echo json_encode($path);
 	echo ",";
-	echo "\"xurl\":";
-	echo "\"";
-	echo getComponentModeXURL($id);
-	echo "\"";
-	echo ",";
 	echo "\"async\":";
 	echo "\"";
 	echo getComponentModeASYNC($id);

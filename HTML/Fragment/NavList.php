@@ -22,7 +22,7 @@
 		class='item_block-disabled sidebar-nav-norm sidebar-nav-l-1' >
 		&nbsp;
 	<?php } ?>
-	</a><a id='nav-menu-up' class='XURL item_block_container <?php if($parentId == "root") echo 'center-arrow'?>' href='<?php echo "/".$parentId ?>' data-target='<?php echo $parentId ?>' data-title='<?php echo getComponentTitle($parentId) ?>'>
+</a><a id='nav-menu-up' class='XURL item_block_container <?php if($parentId == "root") echo 'center-arrow'?>' href='<?php echo getComponentURL($parentId) ?>' data-target='<?php echo $parentId ?>' data-title='<?php echo getComponentTitle($parentId) ?>'>
 		<img class='item_block_image <?php if($parentId == "root") echo "item_block_image_hidden"?>' src='<?php echo getItemImageFileURL($parentId) ?> '><div class="item_block_text"><div><?php if($parentId != "root") echo getComponentTitle($parentId); ?></div><div class='arrow'>&#x25B3;</div></div>
 	</a>
 </div>

@@ -1,4 +1,4 @@
-<meta property="og:url" content="<?php echo $config['base_url'].getComponentURL($id) ?>" />
+<meta property="og:url" content="<?php echo $config['base_url'].getComponentURLtrimmed($id) ?>" />
 <meta property="og:title" content="<?php echo getComponentTitle($id) ?>" />
 <meta property="og:type" content="article" />
 <meta property="og:image" content="<?php echo $config['base_url'].'/'.getComponentMetaImage($id) ?>" />

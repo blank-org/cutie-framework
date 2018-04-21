@@ -14,7 +14,7 @@
 	};
 
 	function item_text($target, $title) {
-?><a class='XURL item_block' href='/<?php echo url_part($target) ?>' data-target='<?php echo $target ?>' data-title='<?php echo $title ?>'><div><?php echo title_label($title) ?></div></a><?php
+?><a class='XURL item_block' href='<?php echo getComponentURL($target) ?>' data-target='<?php echo $target ?>' data-title='<?php echo $title ?>'><div><?php echo getTitleLabel($title) ?></div></a><?php
 	}
 
 ?>

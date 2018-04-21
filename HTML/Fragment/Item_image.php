@@ -27,14 +27,14 @@
 		$imagePath = getItemImageFileURL($target);
 		if($external != null) {
 ?>
-	class='item_block_container' href='<?php echo $external.'/'.$target ?>' target='_blank' onclick="trackOutboundLink('<?php echo title_label($title) ?>','<?php echo $external.'/'.$target ?>'); return false;">
+	class='item_block_container' href='<?php echo $external.'/'.$target ?>' target='_blank' onclick="trackOutboundLink('<?php echo getTitleLabel($title) ?>','<?php echo $external.'/'.$target ?>'); return false;">
 <?php
 		}
 		else {
 ?>
-	class='XURL item_block_container' href='<?php echo '/'.$target ?>' data-target='<?php echo $target ?>' data-title='<?php echo $title ?>'>
+	class='XURL item_block_container' href='<?php echo getComponentURL($target) ?>' data-target='<?php echo $target ?>' data-title='<?php echo $title ?>'>
 <?php	
 		}
-?><img class='item_block_image item_block_image_visible' src='<?php echo $imagePath ?>'><div class="item_block_text"><div><?php echo title_label($title) ?></div><?php if($external) { ?><div class='external'><img src='/resource/external.svg'></div><?php } ?></div></a><?php
+?><img class='item_block_image item_block_image_visible' src='<?php echo $imagePath ?>'><div class="item_block_text"><div><?php echo getTitleLabel($title) ?></div><?php if($external) { ?><div class='external'><img src='/resource/external.svg'></div><?php } ?></div></a><?php
 	}
 ?>

@@ -95,9 +95,16 @@ function getComponentPathStylized($id) {
 	return $pathStack;
 }
 
-function getComponentURL($id) {
+function getComponentURLtrimmed($id) {
 	if($id == 'root')
 		return "";
+	else
+		return ("/".$id);
+}
+
+function getComponentURL($id) {
+	if($id == 'root')
+		return "/";
 	else
 		return ("/".$id);
 }
@@ -198,6 +205,10 @@ function getItemImageFileURL($id) {
 		return '/'.$imageFile['url_path'];
 	else
 		return "/resource/placeholder.svg";
+}
+
+function getTitleLabel($title) {
+	return ($title == '')? 'home' : $title;		
 }
 
 ?>

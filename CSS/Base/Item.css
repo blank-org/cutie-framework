@@ -45,7 +45,7 @@
 	border-bottom-left-radius: 4px;
 	border-bottom-right-radius: 4px;
 
-	color: #69b7cf !important;
+	color: #69b7cf;
 	background-color: white;
 	border-color: #eee;
 	
@@ -81,7 +81,7 @@
 
 	background: white;
 	border-color: #ddd;
-	color: #69b7cf !important;
+	color: #69b7cf;
 	
 	display: inline-block;
 	cursor: pointer;
@@ -100,7 +100,7 @@
 	font-size: 15px;
 	vertical-align: middle;
 	cursor: pointer;
-	color: white!important
+	color: #69b7cf;
 	transition: all ease-out 0.3s;
 }
 
@@ -108,11 +108,11 @@
 	cursor: pointer;
 	border-color: #69b7cf;
 	background-color: #69b7cf;
-	color: white !important;
+	color: white;
 }
 
 .item_block:hover div {
-	color: white !important;
+	color: white;
 }
 
 .item_block-disabled {

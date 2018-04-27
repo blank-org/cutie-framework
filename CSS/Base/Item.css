@@ -66,9 +66,12 @@
 
 .item_block_container:hover .item_block_text {
 	cursor: pointer;
-	color: white !important;
 	border-color: #69b7cf;
 	background-color: #69b7cf;
+}
+
+.item_block_container:hover .item_block_text div {
+	color: white;
 }
 
 .item_block {

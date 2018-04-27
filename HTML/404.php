@@ -7,9 +7,11 @@
 	else
 		$bPublish = FALSE;
 ?>
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" >
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
 	<title>Page Not Found<?php echo ' - '.$config['project_title'] ?></title>
 	<?php
 		if($bPublish) {

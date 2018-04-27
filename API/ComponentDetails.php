@@ -187,10 +187,10 @@ function getComponentImage($id) {
 
 function getComponentMetaImage($id) {
 	$imageFile = getComponentImage($id);
-	if ($imageFile != null)
-		return $imageFile['url_path'];
+	if ($imageFile == null || $id != '')
+		return "social.png";
 	else
-		return "icon-social.png";
+		return $imageFile['url_path'];
 }
 
 function getItemImageFilePath($id) {

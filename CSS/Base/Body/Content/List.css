@@ -1,8 +1,8 @@
-.message > .list-bullet.content-list {
+#message > .list-bullet.content-list {
 	padding-left: 16px !important;
 }
 
-.message > .list-bullet.content-list p {
+#message > .list-bullet.content-list p {
 	padding-left: 10px !important;
 }
 

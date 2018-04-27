@@ -23,7 +23,7 @@ blockquote {
 	text-align: left
 }
 
-.message {
+#message {
 	padding: 0 6px 18px;
 	clear: both;
 	overflow: hidden

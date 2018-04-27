@@ -2,7 +2,7 @@
 	require_once '../API/IncludeDir.php';
 	if($bPublish) {
 ?>
-	<style type='text/css'>
+	<style>
 <?php
 		includeDir('../CSS/Base/', $INCLUDE_TYPE_CSS, $INCLUDE_MODE_EMBED, '');
 		includeDir('../../CSS/Base/', $INCLUDE_TYPE_CSS, $INCLUDE_MODE_EMBED, '');

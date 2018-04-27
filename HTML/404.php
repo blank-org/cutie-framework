@@ -92,7 +92,7 @@
 		</span>
 	</a>
 	<a id='mail-link' href='mailto:<?php echo $webMasterId ?>?subject=<?php echo $config['project_title'] ?>-404'><?php echo $webMasterId ?></a>
-	<script language='JavaScript'>
+	<script>
 		document.getElementById('url').innerHTML = window.location.href;
 	</script>
 </body>

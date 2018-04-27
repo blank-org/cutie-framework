@@ -7,7 +7,7 @@
 	display: inline-block;
 	float: left;
 	transition: all 0.7s;
-	will-change: transform
+	will-change: transform;
 }
 
 .sidebar-sub {

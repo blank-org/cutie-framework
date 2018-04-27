@@ -6,7 +6,7 @@
 	
 	function group_image_id($div_id, $div_class, $max_count, ...$list_items) {
 ?>
-<div id='<?php echo $div_id ?>' class='<?php echo $div_class ?>'>
+<div <?php if($div_id != '') echo "id='$div_id'" ?> class='<?php echo $div_class ?>'>
 <?php
 		foreach ($list_items as $list_item) {
 			if(sizeof($list_item) > 2)

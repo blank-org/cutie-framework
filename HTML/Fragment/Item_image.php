@@ -35,6 +35,6 @@
 	class='XURL item_block_container' href='<?php echo getComponentURL($target) ?>' data-target='<?php echo $target ?>' data-title='<?php echo $title ?>'>
 <?php	
 		}
-?><img class='item_block_image item_block_image_visible' src='<?php echo $imagePath ?>'><div class="item_block_text"><div><?php echo getTitleLabel($title) ?></div><?php if($external) { ?><div class='external'><img src='/resource/external.svg'></div><?php } ?></div></a><?php
+?><img class='item_block_image item_block_image_visible' src='<?php echo $imagePath ?>' alt='Navigation - link to <?php echo $target ?>'><div class='item_block_text'><div><?php echo getTitleLabel($title) ?></div><?php if($external) { ?><div class='external'><img src='/resource/external.svg'></div><?php } ?></div></a><?php
 	}
 ?>

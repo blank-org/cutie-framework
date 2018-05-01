@@ -11,7 +11,7 @@
 <?php
 		if(hasLink($INCLUDE_TYPE_CSS, '../CSS/', '../../CSS/')) {
 ?>
-	<link rel='stylesheet' type='text/css' href='/style.css' >
+	<link rel='stylesheet' href='/style.css' >
 <?php
 		}
 	}

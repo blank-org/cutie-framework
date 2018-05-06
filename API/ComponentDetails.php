@@ -187,7 +187,7 @@ function getComponentImage($id) {
 
 function getComponentMetaImage($id) {
 	$imageFile = getComponentImage($id);
-	if ($imageFile == null || $id != '')
+	if ($imageFile == null || $id == 'root')
 		return "social.png";
 	else
 		return $imageFile['url_path'];

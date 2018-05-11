@@ -169,7 +169,7 @@ function getComponentImage($id) {
 		$ext = 'png';
 		$bIndex = true;
 	}
-	else if(file_exists('../../Resource/'.$id.'/'.'index'.'.'.'svg')) {
+	else if(file_exists('../../Resource/'.$id.'/'.'Index'.'.'.'svg')) {
 		$ext = 'svg';
 		$bIndex = true;
 	}
@@ -178,8 +178,8 @@ function getComponentImage($id) {
 	}
 		
 	$arr = [];
-	$arr['file_path'] = '../../Resource/'.$id.($bIndex? '/'.'Index' : NULL).'.'.$ext;
-	$arr['url_path'] = $id.($bIndex? '/'.'index' : NULL).'.'.$ext;
+	$arr['file_path'] = '../../Resource/'.$id.($bIndex? '/'.'Index' : null).'.'.$ext;
+	$arr['url_path'] = $id.($bIndex? '/'.'index' : null).'.'.$ext;
 	$arr['ext'] = $ext;
 	
 	return $arr;

@@ -11,8 +11,9 @@ body {
 	color: #5a5a5a;
 }
 
-svg {
+.full-width-object svg {
 	width: 100%;
+	height: auto;
 }
 
 .center {

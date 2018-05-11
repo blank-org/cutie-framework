@@ -207,6 +207,14 @@ function getItemImageFileURL($id) {
 		return "/resource/placeholder.svg";
 }
 
+function getItemImageFileExt($id) {
+	$imageFile = getComponentImage($id);
+	if($imageFile != null)
+		return $imageFile['ext'];
+	else
+		return null;
+}
+
 function getTitleLabel($title) {
 	return ($title == '')? 'home' : $title;		
 }

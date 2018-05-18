@@ -6,6 +6,7 @@
 	$INCLUDE_TYPE_EXT = [$INCLUDE_TYPE_CSS => 'css', $INCLUDE_TYPE_JS => 'js'];
 
 	function includeDir($fileRoot, $type, $mode, $exclude) {
+		global $bPublish;
 		global $INCLUDE_MODE_EMBED;
 		global $INCLUDE_MODE_LINK;
 		global $INCLUDE_TYPE_CSS;
@@ -13,6 +14,16 @@
 		global $INCLUDE_TYPE_EXT;
 
 		$files = loadFiles($fileRoot);
+		$i = array_search('Base', $files);
+		if($i != null) {
+			array_splice($files, $i, 1);
+			array_unshift($files, 'Base');
+		}
+		$i = array_search('Script.js', $files);
+		if($i != null) {
+			array_splice($files, $i, 1);
+			array_push($files, 'Script.js');
+		}
 		foreach ($files as $file) {
 			if(!in_array(strtolower($file), [$exclude, 'link', 'fragment'])) {
 				if(is_dir($fileRoot.$file) == 1) {
@@ -31,7 +42,7 @@
 						}
 						else if ($type == $INCLUDE_TYPE_JS) {
 ?>
-	<script async src='<?php echo $filePathRoot.$file ?>'></script>
+	<script src='<?php echo $filePathRoot.$file ?>' <?php if($bPublish) echo 'async'; else if(in_array(strtolower($file), ['script.js'])) echo 'defer' ?>></script>
 <?php
 						}
 						else {

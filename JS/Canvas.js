@@ -23,23 +23,23 @@ function loadCanvas(target, title) {
 	var canvas_main = document.getElementById('canvas-main');
 	var main_wrapper = document.getElementById('main-wrapper');
 
-	classie.add(main_wrapper, 'hide_path_title_updated');
-	classie.add(canvas_main, 'hide');
+	main_wrapper.classList.add('hide_path_title_updated');
+	canvas_main.classList.add('hide');
 
 	var startTime = new Date().getTime();
 	syncScrollReload.startTime = null;
 	scrollTop();
 	initLoading();
 	if(target == 'root') {
-		classie.add(document.getElementById('path-container'), 'hide_scale');
-		classie.add(document.getElementById('title-container'), 'hide_scale');
+		document.getElementById('path-container').classList.add('hide_scale');
+		document.getElementById('title-container').classList.add('hide_scale');
 	}
 	else {
-		classie.remove(document.getElementById('path-container'), 'hide_scale');
-		classie.remove(document.getElementById('title-container'), 'hide_scale');
+		document.getElementById('path-container').classList.remove('hide_scale');
+		document.getElementById('title-container').classList.remove('hide_scale');
 	}
-	classie.add(document.getElementById('path'), 'hide');
-	classie.add(document.getElementById('title'), 'hide');
+	document.getElementById('path').classList.add('hide');
+	document.getElementById('title').classList.add('hide');
 
 	var xmlhttp = new XMLHttpRequest();
 	if(window.XMLHttpRequest) {
@@ -121,13 +121,11 @@ function executeReload(startTime, resp, target) {
 	if(typeof reloadTimeout != 'undefined')
 		clearTimeout(reloadTimeout);
 	reloadTimeout = setTimeout( function() {
-		var canvas_main = document.getElementById('canvas-main');
-		var main_wrapper = document.getElementById('main-wrapper');
 		document.getElementById('content').innerHTML = resp.content;
-		classie.remove(canvas_main, 'hide');
+		document.getElementById('canvas-main').classList.remove('hide');
 		document.getElementById('date').innerHTML = resp.date;
 		if(!URLid == '') {
-			classie.remove(main_wrapper, 'hide_path_title_updated')
+			document.getElementById('main-wrapper').classList.remove('hide_path_title_updated');
 		}
 		var height = document.getElementById('canvas-main').scrollHeight;
 		document.getElementById('nav-menu').style.maxHeight = height+'px';
@@ -151,7 +149,7 @@ function updatePathTitle(path, title) {
 	setTimeout(function() {
 		document.getElementById('path').innerHTML = path;
 		document.getElementById('title').innerHTML = title;
-		classie.remove(document.getElementById('path'), 'hide');
-		classie.remove(document.getElementById('title'), 'hide');
+		document.getElementById('path').classList.remove('hide');
+		document.getElementById('title').classList.remove('hide');
 	}, 300);
 }

@@ -44,3 +44,5 @@ var activateMain = function() {
 	activateMainFn();	
 }
 
+var initLoadDone = false;
+initLoad();

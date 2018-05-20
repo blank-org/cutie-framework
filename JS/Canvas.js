@@ -91,7 +91,9 @@ function loadCanvas(target, title) {
 
 function scrollTop() {
 	scrollActive = true;
-	var y = window.scrollY;
+	var y = document.documentElement.scrollTop;
+	if(typeof y === 'undefined')
+		y = 0;
 	var dy = 100;
 	var scrollInterval = setInterval(function() {
 		window.scrollTo(0, y);

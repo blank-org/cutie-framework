@@ -8,16 +8,12 @@ var isTranslateButtonActive;
 var isSearchButtonActive;
 
 var activateMenuFn = function() {
-	var nav_menu = document.querySelector( '#nav-menu' ),
-		canvas_main = document.querySelector( '#canvas-main' ),
-		main_wrapper = document.querySelector( '#main-wrapper' ),
-		menu_button = document.querySelector( '#menu-button' );
-	main_wrapper.classList.add('pml-open');
-	menu_button.classList.add('active');
+	document.getElementById('main-wrapper').classList.add('pml-open');
+	document.getElementById('menu-button').classList.add('active');
 	activeNav = 'pml-open';
-	var height = nav_menu.scrollHeight;
-	canvas_main.style.maxHeight = height+'px';
-	nav_menu.style.maxHeight = null;
+	var height = document.getElementById('nav-menu').scrollHeight;
+	document.getElementById('canvas-main').style.maxHeight = height+'px';
+	document.getElementById('nav-menu').style.maxHeight = null;
 	menuActive = true;
 	if(!(typeof (ga) === 'undefined')) {
 		ga('set', 'page', '/'+'menu');

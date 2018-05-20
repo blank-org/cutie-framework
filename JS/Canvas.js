@@ -43,10 +43,10 @@ function loadCanvas(target, title) {
 
 	var xmlhttp = new XMLHttpRequest();
 	if(window.XMLHttpRequest) {
-		xmlhttp=new XMLHttpRequest();
+		xmlhttp = new XMLHttpRequest();
 	}
 	else { // IE6, IE5
-		xmlhttp=new ActiveXObject('Microsoft.XMLHTTP');
+		xmlhttp = new ActiveXObject('Microsoft.XMLHTTP');
 	}
 	xmlhttp.onreadystatechange = function() {
 

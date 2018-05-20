@@ -9,8 +9,8 @@ function loadCanvasH(e) {
 		URLid = '';
 	else
 		URLid = target;
+	recordState(target, e.getAttribute('data-title'));
 	loadCanvas(target, e.getAttribute('data-title'));
-	window.history.pushState({'id':target, 'title':e.getAttribute('data-title')}, '', '/'+URLid);
 	if(!(typeof (ga) === 'undefined')) {
 		ga('set', 'page', '/'+URLid);
 		ga('send', 'pageview');
@@ -19,6 +19,7 @@ function loadCanvasH(e) {
 
 function loadCanvas(target, title) {
 
+	curTab = target;
 	var date = document.getElementById('updated');
 	var canvas_main = document.getElementById('canvas-main');
 	var main_wrapper = document.getElementById('main-wrapper');

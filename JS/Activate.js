@@ -22,7 +22,6 @@ var activateMenuFn = function() {
 }
 
 var activateMenu = function() {
-	window.history.pushState({'id':curTab}, '', '/'+curTab);
 	activateMenuFn();
 }
 
@@ -34,7 +33,6 @@ var activateMainFn = function() {
 }
 
 var activateMain = function() {
-	window.history.pushState({'id':curTab}, '', '/'+curTab);
+	replaceState(curTab, document.getElementById('title').innerText);
 	activateMainFn();	
 }
-

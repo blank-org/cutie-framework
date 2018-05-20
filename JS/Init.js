@@ -38,17 +38,16 @@ function init() {
 			document.querySelector('#nav-menu').style.maxHeight = canvas_main.scrollHeight+'px';
 	
 		if (!hashID && !URLid)
-			window.history.replaceState({'id':'root'}, '', '/');
+			replaceState('root', '');
+		else if(URLid == 'menu')
+			replaceState('menu', '');
 	
 		menu_button.addEventListener( 'click', function() {
 			if (!menuActive) {
 				activateMenu();
 			}
 			else {
-				if(curTab == 'root' || curTab == 'menu')
-					curTab = '';
-				window.history.pushState({'id':curTab}, '', '/'+curTab);
-				activateMainFn();
+				activateMain();
 				canvas_main.style.maxHeight = null;
 				document.querySelector('#nav-menu').style.maxHeight = canvas_main.scrollHeight+'px';
 			}
@@ -104,7 +103,6 @@ function init() {
 	
 		[].slice.call(menu_items).forEach( function(el,i) {
 				el.addEventListener( 'click', function() {
-					curTab = this.getAttribute('data-target');
 					activateMainFn();
 				} );
 			} );

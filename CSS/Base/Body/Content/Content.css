@@ -46,6 +46,11 @@ blockquote {
 	padding-left: 20px
 }
 */
+#content p.first-letter-high::first-letter {
+	color: #69b7cf;
+	font-size: 240%;
+	padding-right: 2px;
+}
 
 .content-low {
 	color: #ccc

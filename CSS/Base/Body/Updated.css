@@ -6,7 +6,7 @@
 
 #updated {
 	display: inline-block;
-	font-size: 12px;
+	font-size: 0.75em;
 	color: #bbbbbb!important;
 	will-change: opacity
 }

@@ -29,10 +29,6 @@ blockquote {
 	overflow: hidden
 }
 /* 
-.content {
-	font-size: 16px
-}
-
 .content ol {
 	padding-left: 20px
 }
@@ -48,7 +44,7 @@ blockquote {
 */
 #content p.first-letter-high::first-letter {
 	color: #69b7cf;
-	font-size: 240%;
+	font-size: 2.4em;
 	padding-right: 2px;
 }
 

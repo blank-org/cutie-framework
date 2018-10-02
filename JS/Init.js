@@ -41,6 +41,8 @@ function init() {
 			replaceState('root', '');
 		else if(URLid == 'menu')
 			replaceState('menu', '');
+		else
+			recordState(URLid, '');
 	
 		menu_button.addEventListener( 'click', function() {
 			if (!menuActive) {

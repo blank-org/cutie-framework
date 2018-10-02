@@ -40,7 +40,6 @@
 #canvas-main {
 	overflow: hidden;
 	width: 50%;
-	display: inline-block;
 	transform: translate(-100%,0);
 	transition: all 1s;
 	will-change: transform

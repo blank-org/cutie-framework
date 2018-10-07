@@ -77,7 +77,7 @@
 	<h1>Page Not Found</h1>
 	<p>
 		This specified file was not found on this website:
-		<span id='url'></span>
+		<div id='url'></div>
 	</p>
 	<p>
 		Please check the URL for mistakes and try again.
@@ -89,9 +89,9 @@
 		continue to the homepage:
 	</p>
 	<a id='header-logo-href' href='/'>
-		<span id='logo'>
+		<div id='logo'>
 			<?php require '../../Resource/Logo_Full.svg' ?>
-		</span>
+		</div>
 	</a>
 	<a id='mail-link' href='mailto:<?php echo $webMasterId ?>?subject=<?php echo $config['project_title'] ?>-404'><?php echo $webMasterId ?></a>
 	<script>

@@ -7,7 +7,7 @@
 	margin: 18px 20px
 }
 
-.social>a>span {
+.social .image {
 	background-size: contain;
 	width: 34px;
 	height: 34px;
@@ -15,10 +15,10 @@
 	background-repeat: no-repeat;
 }
 
-.social>a>span path {
+.social .image path {
 	transition: all ease-out 0.3s
 }
 
-#site-twitter:hover path, #site-facebook:hover path, #site-gplus:hover span>svg>path, #site-youtube:hover #lozenge path {
+#site-twitter:hover path, #site-facebook:hover path, #site-gplus:hover .image>svg>path, #site-youtube:hover #lozenge path {
 	fill: #56b4d1
 }

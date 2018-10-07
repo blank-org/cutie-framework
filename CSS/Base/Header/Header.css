@@ -38,13 +38,13 @@
 	visibility: hidden
 }
 
-span#header_buttons_right {
+#header_buttons_right {
 	margin: 0;
 	float: right;
 	text-align: right
 }
 
-span#header-logo-image {
+#header-logo-image {
 	height: 50px;
 	width: 144px;
 	background-size: contain
@@ -55,8 +55,7 @@ span#header-logo-image {
 	text-align: center
 }
 
-span.header-logo {
-	width: 153px;
+.header-logo {
 	display: inline-block
 }
 

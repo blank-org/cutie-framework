@@ -88,10 +88,8 @@
 	<p>
 		continue to the homepage:
 	</p>
-	<a id='header-logo-href' href='/'>
-		<div id='logo'>
-			<?php require '../../Resource/Logo_Full.svg' ?>
-		</div>
+	<a id='logo' href='/'>
+		<?php require '../../Resource/Logo_Full.svg' ?>
 	</a>
 	<a id='mail-link' href='mailto:<?php echo $webMasterId ?>?subject=<?php echo $config['project_title'] ?>-404'><?php echo $webMasterId ?></a>
 	<script>

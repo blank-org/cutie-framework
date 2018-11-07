@@ -15,7 +15,7 @@ code.inline {
 code.block {
 	display: block;
 	padding: 8px 14px;
-	background-image: -webkit-linear-gradient(left,#f2f2f2,transparent)
+	background: linear-gradient(to right, #f2f2f2 20%, white);
 }
 
 blockquote {

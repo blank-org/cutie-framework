@@ -16,7 +16,7 @@ p.content-list-example {
 }
 
 .content-list > li {
-	background-color: transparent;
+	background-color: white;
 	vertical-align: baseline;
 	padding-bottom: 14px;
 }

@@ -23,7 +23,8 @@
 	}
 
 	#content p {
-		padding-left: 6px
+		padding-left: 6px;
+		padding-right: 6px
 	}
 
 	#nav-list {

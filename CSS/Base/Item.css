@@ -46,9 +46,9 @@
 	border-bottom-right-radius: 4px;
 
 	color: #69b7cf;
-	background-color: white;
-	border-color: #eee;
 	
+	background-color: #f6f6f6;
+	border-color: #f4f4f4;
 	display: inline-block;
 	cursor: pointer;
 	text-decoration: none;
@@ -82,8 +82,8 @@
 	border-width: 1px;
 	border-radius: 5px;
 
-	background: white;
-	border-color: #ddd;
+	background: #f6f6f6;
+	border-color: #f4f4f4;
 	color: #69b7cf;
 	
 	display: inline-block;

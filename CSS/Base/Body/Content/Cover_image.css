@@ -1,10 +1,12 @@
 .cover-image img {
+	width: 100%;
 	border-radius: 8px
 }
 
 .cover-image {
 	height: 0;
+	margin: 0px 2px 1px 2px;
 	border-radius: 8px;
-	-webkit-box-shadow: 0 1px 10px #afafaf;
-	-moz-box-shadow: 0 1px 10px #afafaf
+	background: #DDDDDD;
+	box-shadow: 0 1px 10px #C7C7C7
 }

@@ -60,11 +60,11 @@ function getSubComponents($id) {
 	$matches = array_filter($component, function($a) use($pattern)  {
 		return preg_grep($pattern, $a);
 	});
-	
+
 	$ary = [];
 	foreach ($matches as $key => $value) {
 		array_push($ary, array($value[0], $value[1]));
-	}	
+	}
 	return $ary;
 }
 
@@ -185,12 +185,12 @@ function getComponentImage($id) {
 	else {
 		return null;
 	}
-		
+
 	$arr = [];
 	$arr['file_path'] = '../../Resource/'.$id.($bIndex? '/'.'Index' : null).'.'.$ext;
 	$arr['url_path'] = $id.($bIndex? '/'.'index' : null).'.'.$ext;
 	$arr['ext'] = $ext;
-	
+
 	return $arr;
 }
 
@@ -225,7 +225,7 @@ function getItemImageFileExt($id) {
 }
 
 function getTitleLabel($title) {
-	return ($title == '')? 'home' : $title;		
+	return ($title == '')? 'home' : $title;
 }
 
 ?>

@@ -121,12 +121,19 @@ function getParentId($id) {
 
 function getPrevId($id) {
 	global $component;
-	for($i = 0; $i < count($component); $i++)
-		if($component[$i][0] == $id)
-			if($i != 0 && getParentId($id) == getParentId($component[$i-1][0]))
-				return $component[$i-1][0];
-			else
+	$found = false;
+	for($i = count($component)-1; $i >= 0; $i--) {
+		if($found == false && $component[$i][0] == $id)
+			$found = true;
+		if($found == true) {
+			if($i == 0)
 				return "";
+			else if(count($component[$i-1]) > 4 && $component[$i-1][4] == 'HIDDEN')
+				$i--;
+			else if(getParentId($id) == getParentId($component[$i-1][0]))
+				return $component[$i-1][0];
+		}
+	}
 	exit_404("Wrong ID"." : ".$id);
 }
 
@@ -139,8 +146,10 @@ function getNextId($id) {
 		if($found == true) {
 			if($i == count($component)-1)
 				return "";
+			else if(count($component[$i+1]) > 4 && $component[$i+1][4] == 'HIDDEN')
+				$i++;
 			else if(getParentId($id) == getParentId($component[$i+1][0]))
-					return $component[$i+1][0];
+				return $component[$i+1][0];
 		}
 	}
 	exit_404("Wrong ID"." : ".$id);

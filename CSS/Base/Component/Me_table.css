@@ -22,3 +22,7 @@
 	text-align: left;
 	max-width: 80%;
 }
+
+#me-table .R2 > .separator {
+	color: #ADADAD
+}

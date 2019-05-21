@@ -9,6 +9,10 @@
 ?>
 <div class="content-image-container" style='max-height: <?php echo $height; ?>px'>
 	<div class="content-image <?php if($center=='true') echo 'center'; ?>" style="padding-bottom: <?php echo round($height/$width*100, 2)?>%">
-		<img src='/<?php echo $id.'/'.$title.'.'.$ext ?>' alt="<?php echo $alt ?>">
+<?php if($ext == 'svg') { ?>
+				<object data='/<?php echo $id.'/'.$title.'.'.$ext ?>'></object>
+<?php } else { ?>
+				<img src='/<?php echo $id.'/'.$title.'.'.$ext ?>' alt="<?php echo $alt ?>">
+<?php } ?>
 	</div>
 </div>

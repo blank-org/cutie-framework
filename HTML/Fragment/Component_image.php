@@ -12,7 +12,7 @@
 <?php if($ext == 'svg') { ?>
 				<object data='/<?php echo $id.'/'.$title.'.'.$ext ?>'></object>
 <?php } else { ?>
-				<img src='/<?php echo $id.'/'.$title.'.'.$ext ?>' alt="<?php echo $alt ?>">
+				<img src='/<?php echo $id.'/'.$title.'.'.$ext ?>' loading='lazy' alt="<?php echo $alt ?>">
 <?php } ?>
 	</div>
 </div>

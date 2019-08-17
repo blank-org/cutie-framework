@@ -22,7 +22,6 @@ function loadCanvasH(e) {
 function loadCanvas(target, title) {
 
 	curTab = target;
-	var date = document.getElementById('updated');
 	var canvas_main = document.getElementById('canvas-main');
 	var main_wrapper = document.getElementById('main-wrapper');
 

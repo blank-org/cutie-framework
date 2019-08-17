@@ -69,13 +69,11 @@ function loadCanvas(target, title) {
 					syncScrollReload(startTime, resp, target);
 				} break;
 				case 404: {
-					document.getElementById('date').innerHTML = '';
 					canvas_main.innerHTML = "Error: 404 - Resource not found!";
 				} break;
 				case 408:
 				case 501:
 				case 502: {
-					document.getElementById('date').innerHTML = '';
 					canvas_main.innerHTML = 'Error!';
 					errorLoading();
 				}
@@ -128,7 +126,6 @@ function executeReload(startTime, resp, target) {
 	reloadTimeout = setTimeout( function() {
 		document.getElementById('content').innerHTML = resp.content;
 		document.getElementById('canvas-main').classList.remove('hide');
-		document.getElementById('date').innerHTML = resp.date;
 		if(!URLid == '') {
 			document.getElementById('main-wrapper').classList.remove('hide_path_title_updated');
 		}

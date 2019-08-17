@@ -22,7 +22,8 @@
 	$id = substr(getOrigCall(), 0, -5); //stripping extension part
 	$file = getComponentPath($id);
 	$desc = getComponentDesc($id);
-
+	$date = getFileDate($file);
+	
 	header('Content-type: application/json; charset=utf-8');
 
 	ob_start();
@@ -68,11 +69,6 @@
 	echo "\"async\":";
 	echo "\"";
 	echo getComponentModeASYNC($id);
-	echo "\"";
-	echo ",";
-	echo "\"date\":";
-	echo "\"";
-	echo getFileDate($file);
 	echo "\"";
 	echo ",";
 	echo "\"desc\":";

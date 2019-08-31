@@ -22,7 +22,6 @@ function loadComponents() {
 	return $component;
 }
 
-function getComponentTitle($id) {
 function getComponentIndex($id) {
 	global $component;
 	
@@ -33,9 +32,17 @@ function getComponentIndex($id) {
 	exit_404("Wrong ID"." : ".$id);
 }
 
-	if($id == '')
+function getComponentPageTitle($id) {
+	global $component;
+	$componentPageTitle = getComponentTitle($id);
+	$id_index = getComponentIndex($id);
+	if( count($component[$id_index]) > 4 && in_array( 'HIDE_TITLE', explode(' ', $component[$id_index][4]) ) )
 		return '';
+	else
+		return $componentPageTitle;
+}
 
+function getComponentTitle($id) {
 	global $component;
 
 	if($id == '')

@@ -3,7 +3,7 @@
 	z-index: 1;
 	overflow: hidden;
 	width: 50%;
-	transform: translateX(-932px);
+	transform: translateX(-100%);
 	display: inline-block;
 	float: left;
 	transition: all 0.7s;

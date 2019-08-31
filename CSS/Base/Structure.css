@@ -22,7 +22,6 @@
 
 #wrapper {
 	margin: 0 auto;
-	max-width: 932px;
 	padding-bottom: 192px
 }
 
@@ -33,7 +32,7 @@
 }
 
 #canvas-wrapper-inner-container {
-	max-width: 1868px;
+	max-width: 2880px;
 	width: 200%;
 }
 

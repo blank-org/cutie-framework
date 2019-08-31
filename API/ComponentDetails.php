@@ -23,34 +23,35 @@ function loadComponents() {
 }
 
 function getComponentTitle($id) {
+function getComponentIndex($id) {
 	global $component;
+	
+	for($i = 0; $i < count($component); $i++)
+		if($component[$i][0] == $id)
+				return $i;
+				
+	exit_404("Wrong ID"." : ".$id);
+}
 
 	if($id == '')
 		return '';
 
-	for($i = 0; $i < count($component); $i++)
-		if($component[$i][0] == $id)
-			return $component[$i][1];
+	global $component;
 
-	exit_404("Wrong ID"." : ".$id);
+	if($id == '')
+		return '';
+	else
+		return $component[getComponentIndex($id)][1];
 }
 
 function getComponentDesc($id) {
 	global $component;
-
-	for($i = 0; $i < count($component); $i++)
-		if($component[$i][0] == $id)
-			return $component[$i][3];
-	exit_404("Wrong ID"." : ".$id);
+	return $component[getComponentIndex($id)][3];
 }
 
 function getComponentModeASYNC($id) {
 	global $component;
-
-	for($i = 0; $i < count($component); $i++)
-		if($component[$i][0] == $id)
-			return $component[$i][2];
-	exit_404("Wrong ID"." : ".$id);
+	return $component[getComponentIndex($id)][2];
 }
 
 function getSubComponents($id) {

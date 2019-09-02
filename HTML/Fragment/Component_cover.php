@@ -12,6 +12,6 @@
 	else
 		list($width, $height, $type, $attr) = getimagesize($imageFile['file_path']);
 ?>
-<div class='cover-image' style='padding-bottom: <?php echo round($height/$width*100, 2)?>%'>
+<div class='cover-image' style='padding-bottom: <?php echo round($height/$width*80, 2)?>%'>
 	<img src='/<?php echo $id.'.'.$imageFile['ext']; ?>' alt='<?php echo $alt ?>'>
 </div>

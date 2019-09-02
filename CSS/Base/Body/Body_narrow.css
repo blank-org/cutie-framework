@@ -6,7 +6,6 @@
 	}
 
 	.message_left_div, .message_right_div, .message_center_div, #message > * {
-		display: block;
 		width: auto;
 		margin-left: auto;
 		margin-right: auto

@@ -30,3 +30,48 @@ h1 {
 img {
 	max-width: 100%;
 }
+
+#message.alt_div_shade {
+	padding-left: 0 !important;
+	padding-right: 0 !important;
+}
+
+.alt_div_shade > div, .odd_shade, .even_shade {
+	padding-left: 6px;
+}
+
+.odd_shade, .alt_div_shade > div:nth-child(odd) {
+	padding-top: 0px;
+	padding-bottom: 28px;
+}
+
+.even_shade, .alt_div_shade > div:nth-child(even) {
+	padding-top: 20px;
+	padding-bottom: 28px;
+	background: linear-gradient(to right, #f2f2f2 20%, white);
+	border-radius: 8px
+}
+
+.alt_div_shade > div > h2, .odd_shade > h2, .even_shade > h2 {
+	padding-left: 16px;
+}
+
+.message_left_div {
+	display: inline-block;
+	width: 80%;
+	float: left;
+	margin-left: 0%
+}
+
+.message_right_div {
+	width: 80%;
+	display: inline-block;
+	float: right;
+	margin-right: 0%
+}
+
+.message_center_div, #message > *, #nav-menu_container {
+	display: inline-block;
+	margin-left: 10%;
+	width: 80%
+}

@@ -70,8 +70,13 @@ img {
 	margin-right: 0%
 }
 
-.message_center_div, #message > *, #nav-menu_container {
+.message_center_div, #message > *, #nav-menu_container, #fb_components {
 	display: inline-block;
 	margin-left: 10%;
 	width: 80%
+}
+
+.google-auto-placed {
+	margin: 0 !important;
+	width: 100% !important
 }

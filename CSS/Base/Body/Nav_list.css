@@ -15,7 +15,12 @@
 }
 
 #nav-menu-prev {
-	float: left;
+	float: left
+}
+
+#nav-menu-prev > .item_block_text > div {
+	margin-left: 12px;
+	margin-right: 0
 }
 
 #nav-menu-next {
@@ -28,5 +33,5 @@
 
 #nav-menu-next > .item_block_text > div {
 	margin-left: 0px;
-	margin-right: 28px;
+	margin-right: 12px
 }

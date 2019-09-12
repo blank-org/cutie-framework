@@ -32,17 +32,17 @@ function getComponentIndex($id) {
 	exit_404("Wrong ID"." : ".$id);
 }
 
-function getComponentPageTitle($id) {
+function getComponentPageLabel($id) {
 	global $component;
-	$componentPageTitle = getComponentTitle($id);
+	$componentPageLabel = getComponentLabel($id);
 	$id_index = getComponentIndex($id);
-	if( count($component[$id_index]) > 4 && in_array( 'HIDE_TITLE', explode(' ', $component[$id_index][4]) ) )
+	if( count($component[$id_index]) > 5 && in_array( 'HIDE_TITLE', explode(' ', $component[$id_index][5]) ) )
 		return '';
 	else
-		return $componentPageTitle;
+		return $componentPageLabel;
 }
 
-function getComponentTitle($id) {
+function getComponentLabel($id) {
 	global $component;
 
 	if($id == '')
@@ -51,14 +51,23 @@ function getComponentTitle($id) {
 		return $component[getComponentIndex($id)][1];
 }
 
+function getComponentTitle($id) {
+	global $component;
+
+	if($id == '')
+		return '';
+	else
+		return $component[getComponentIndex($id)][2];
+}
+
 function getComponentDesc($id) {
 	global $component;
-	return $component[getComponentIndex($id)][3];
+	return $component[getComponentIndex($id)][4];
 }
 
 function getComponentModeASYNC($id) {
 	global $component;
-	return $component[getComponentIndex($id)][2];
+	return $component[getComponentIndex($id)][3];
 }
 
 function getSubComponents($id) {
@@ -96,7 +105,7 @@ function getComponentPathStylized($id) {
 		$idStack = $idStack.$value;
 		$x = array();
 		array_push($x, $idStack);
-		array_push($x, GetComponentTitle($idStack));
+		array_push($x, getComponentLabel($idStack));
 		array_push($pathStack, $x);
 		$idStack = $idStack."/";
 	}
@@ -136,7 +145,7 @@ function getPrevId($id) {
 		if($found == true) {
 			if($i == 0)
 				return "";
-			else if(count($component[$i-1]) > 4 && $component[$i-1][4] == 'HIDDEN')
+			else if( count($component[$i-1]) > 5 && in_array( 'HIDDEN', explode(' ', $component[$i-1][5]) ) )
 				$i--;
 			else if(getParentId($id) == getParentId($component[$i-1][0]))
 				return $component[$i-1][0];
@@ -154,7 +163,7 @@ function getNextId($id) {
 		if($found == true) {
 			if($i == count($component)-1)
 				return "";
-			else if(count($component[$i+1]) > 4 && $component[$i+1][4] == 'HIDDEN')
+			else if( count($component[$i+1]) > 5 && in_array( 'HIDDEN', explode(' ', $component[$i+1][5]) ) )
 				$i++;
 			else if(getParentId($id) == getParentId($component[$i+1][0]))
 				return $component[$i+1][0];

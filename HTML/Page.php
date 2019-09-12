@@ -24,7 +24,9 @@
 		$menu_active_class = "pml-open";
 		$id = "root";
 	}
-	$title = getComponentPageTitle($id);
+	
+	$label = getComponentPageLabel($id);
+	$title = getComponentTitle($id);
 	$desc = getComponentDesc($id);
 	$date = getFileDate(getComponentPath($id));
 

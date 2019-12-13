@@ -9,7 +9,7 @@
 ?>
 <div class='content-image-container' <?php if(isset($max_height)) { ?> style='max-height: <?php echo $height; ?>px' <?php } ?>>
 	<div class="content-image <?php if(!empty($center)) echo 'center'; ?>" style="padding-bottom: <?php echo round($height/$width*100, 2)?>%">
-<?php if($ext == 'svg') { ?>
+<?php if( $ext == 'svg' && !(isset($extern)) ) { ?>
 				<object data='/<?php echo $id.'/'.$img_title.'.'.$ext ?>' loading='lazy'></object>
 <?php } else { ?>
 				<img src='/<?php echo $id.'/'.$img_title.'.'.$ext ?>' loading='lazy' alt="<?php echo $alt ?>">

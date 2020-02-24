@@ -14,7 +14,14 @@
 	};
 
 	function item_text($target, $title) {
-?><a class='XURL item_block' href='<?php echo getComponentURL($target) ?>' data-target='<?php echo $target ?>' data-title='<?php echo $title ?>'><div><?php echo getTitleLabel($title) ?></div></a><?php
+		if(strstr($target, '//') == true) {
+?>
+			<a class="content-link item_block" href='<?php echo $target ?>' ><div><?php echo $title ?></div></a>
+<?php
+		} else {
+?>
+			<a class="XURL item_block" href='<?php echo getComponentURL($target) ?>' data-target='<?php echo $target ?>' data-title='<?php echo $title ?>'><div><?php echo getTitleLabel($title) ?></div></a>
+<?php
+		}
 	}
-
 ?>

@@ -2,8 +2,16 @@
 	if($id == 'root')
 		echo '&nbsp;';
 	else {
+		if(isComponentExternRoot('root')) {
+?>
+	<a class='content-link' href='/'>&#8962; </a>
+<?php
+		} else {
 ?>
 	<a class='XURL content-link' href='/' data-target='root' data-title=''>&#8962; </a>
+<?php
+		}
+?>
 	<span class='path-separator'>\</span>
 <?php
 		foreach (getComponentPathStylized($id) as $key => $value) {

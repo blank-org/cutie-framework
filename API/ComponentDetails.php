@@ -42,6 +42,12 @@ function getComponentPageLabel($id) {
 		return $componentPageLabel;
 }
 
+function isComponentExternRoot($id) {
+	global $component;
+	$id_index = getComponentIndex($id);
+	return ( $id == 'root' && count($component[$id_index]) > 5 && in_array( 'EXTERNAL', explode(' ', $component[$id_index][5]) ) );	
+}
+
 function getComponentLabel($id) {
 	global $component;
 

@@ -21,8 +21,13 @@
 		else { ?>
 		class='item_block-disabled sidebar-nav-norm sidebar-nav-l-1' >
 		&nbsp;
-	<?php } ?>
-</a><a id='nav-menu-up' class='XURL item_block_container <?php if($parentId == 'root') echo 'center-arrow'?>' href='<?php echo getComponentURL($parentId) ?>' data-target='<?php echo $parentId ?>' data-title='<?php echo getComponentLabel($parentId) ?>'>
-		<img class='item_block_image <?php if($parentId == 'root') echo 'item_block_image_hidden'?>' loading='lazy' src='<?php echo getItemImageFileURL($parentId) ?> ' alt='Navigation - up level tile'><div class='item_block_text'><div><?php if($parentId != 'root') echo getComponentLabel($parentId); ?></div><div class='arrow'>&#x25B2;</div></div>
+	<?php }
+		if(isComponentExternRoot($parentId)) {?>
+	</a><a id='nav-menu-up' class='content-link item_block_container center-arrow' href='/'>
+		<img class="item_block_image item_block_image_hidden" loading='lazy' src='<?php echo getItemImageFileURL($parentId) ?> ' alt='Navigation - up level tile'><div class='item_block_text'><div class='arrow'>&#x25B2;</div></div>
 	</a>
+	<?php } else {?>
+	</a><a id='nav-menu-up' class='XURL item_block_container <?php if($parentId == 'root') echo 'center-arrow'?>' href='<?php echo getComponentURL($parentId) ?>' data-target='<?php echo $parentId ?>' data-title='<?php echo getComponentLabel($parentId) ?>'>
+		<img class='item_block_image <?php if($parentId == 'root') echo 'item_block_image_hidden'?>' loading='lazy' src='<?php echo getItemImageFileURL($parentId) ?> ' alt='Navigation - up level tile'><div class='item_block_text'><div><?php if($parentId != 'root') echo getComponentLabel($parentId); ?></div><div class='arrow'>&#x25B2;</div></div>
+	</a> <?php } ?>
 </div>

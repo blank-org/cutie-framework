@@ -27,7 +27,7 @@
 		$imagePath = getItemImageFileURL($target);
 		if($external != null) {
 ?>
-	class='item_block_container' href='<?php echo $external.'/'.$target ?>' target='_blank' onclick="trackOutboundLink('<?php echo getTitleLabel($title) ?>','<?php echo $external.'/'.$target ?>'); return false;">
+	class='item_block_container' href='<?php echo $external ?>' target='_blank' onclick="trackOutboundLink('<?php echo getTitleLabel($title) ?>','<?php echo $external ?>'); return false;">
 <?php
 		}
 		else {

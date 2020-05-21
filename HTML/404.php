@@ -1,11 +1,7 @@
 <?php
-	require_once '../API/Config.php';
+	require_once '../API/Pre.php';
 	$config = loadConfig();
 	$webMasterId = 'webmaster'.'@'.$config['site_domain'];
-	if( isset($_GET['mode']) && ($_GET['mode'] === 'publish') )
-		$bPublish = TRUE;
-	else
-		$bPublish = FALSE;
 ?>
 <!DOCTYPE html>
 <html xmlns='http://www.w3.org/1999/xhtml' lang='en'>

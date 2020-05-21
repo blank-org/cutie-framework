@@ -1,17 +1,7 @@
 <?php
-	require_once '../API/API.php';
-	require_once '../API/ComponentDetails.php';
-	require_once '../API/IncludeSVG.php';
-	require_once '../API/Config.php';
+	require_once '../../Framework/API/Pre.php';
 	require_once 'Fragment/Item.php';
 	
-	$config = loadConfig();
-
-	if( isset($_GET['mode']) && ($_GET['mode'] === "publish") )
-		$bPublish = TRUE;
-	else
-		$bPublish = FALSE;
-
 	$component = loadComponents();
 
 	$id = getOrigCall();

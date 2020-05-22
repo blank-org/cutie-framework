@@ -39,6 +39,7 @@
 	}
 
 	function exit_404($message) {
+		global $bPublish; 
 		header("HTTP/1.0 404 Not Found");
 		error_log($message);
 		require '404.php';

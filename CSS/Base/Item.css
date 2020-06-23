@@ -118,13 +118,13 @@
 .item_block-disabled {
 	visibility: hidden;
 	vertical-align: middle;
-	width: 158px;
-	height: 64px;
-	margin: 5px;
+	width: 156px;
+	height: 143px;
+	margin: 5px 12px;
 	line-height: 64px;
 	display: inline-block;
+	border: none;
 	border-style: solid;
-	border-width: 1px;
 	border-color: #efefef;
 	background-color: #fff !important;
 }

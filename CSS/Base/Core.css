@@ -45,18 +45,18 @@ body {
 	text-decoration: none
 }
 
-.content-link {
+.content-link, .link {
 	text-decoration: none;
 	color: #69b7cf!important
 }
 
-.content-link-gray {
+.content-link-gray,.link-gray {
 	text-decoration: none;
 	color: #bbbbbb!important;
 	transition: all ease-out 0.3s;
 }
 
-.content-link-gray:hover {
+.content-link-gray:hover, .link:hover {
 	text-decoration: none;
 	color: #69b7cf!important
 }

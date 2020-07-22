@@ -10,6 +10,11 @@ h2 {
 	color: #AAAAAA !important;
 }
 
+.h_faded_bar h2 {
+	padding: 5px 0 7px 11px;
+	background: linear-gradient(to right,#f2f2f2 20%,white);	
+}
+
 h2 > .key {
 	font-size: 1.12em;
 	color: #69b7cf !important;

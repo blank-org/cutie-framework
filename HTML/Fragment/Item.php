@@ -1,7 +1,7 @@
 <?php
-	require_once 'Fragment\Link.php';
-	require_once 'Fragment\Item_text.php';
-	require_once 'Fragment\Item_image.php';
+	require_once 'Fragment/Link.php';
+	require_once 'Fragment/Item_text.php';
+	require_once 'Fragment/Item_image.php';
 
 	function placeholder($max_count, $nItems) {
 		if($max_count) {

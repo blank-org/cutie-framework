@@ -4,7 +4,7 @@ function loadComponents() {
 	global $bPublish;
 	global $bFull;
 
-	$fHandle = fopen("..\..\..\Config\ID.tsv", "r");
+	$fHandle = fopen("../../../Config/ID.tsv", "r");
 	fgetcsv($fHandle);
 	$i = 0;
 	while(($tsvLine = fgetcsv($fHandle, 0, "\t")) !== FALSE) {
@@ -92,9 +92,9 @@ function getSubComponents($id) {
 }
 
 function getComponentPath($id) {
-	$s = "..\\..\\HTML\\Component\\".str_replace(' ','_', $id);
+	$s = "../../HTML/Component/".str_replace(' ','_', $id);
 	if(file_exists($s)) {
-		$s = $s."\Index";
+		$s = $s."/Index";
 	}
 	if(file_exists($s.".php"))
 		return ($s.".php");

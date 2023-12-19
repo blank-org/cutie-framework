@@ -23,7 +23,7 @@
 	// $dom = new DOMDocument();
 
 	// ob_start();
-	require '..\..\HTML\Template\Base.php';
+	require '../../HTML/Template/Base.php';
 	// $dom->loadHTML(ob_get_contents());
 	// ob_end_clean();
 

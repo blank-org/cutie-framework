@@ -1,5 +1,5 @@
 <?php
-	$imageFileName = '..\\..\\Resource\\'.$id.'\\'.$img_title.'.'.$ext;
+	$imageFileName = '../../Resource/'.$id.'/'.$img_title.'.'.$ext;
 	if($ext == 'svg') {
 		$svgfile = simplexml_load_file($imageFileName);
 		list($NULL, $NULL, $width, $height) = explode(' ', $svgfile['viewBox']);

@@ -27,7 +27,7 @@
 	header('Content-type: application/json; charset=utf-8');
 
 	ob_start();
-	include("..\HTML\Fragment\Path.php");
+	include("../HTML/Fragment/Path.php");
 	$path = ob_get_clean();
 
 	if(endsWith($file, ".php")) {

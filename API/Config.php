@@ -3,8 +3,6 @@
 function loadConfig() {
 	global $variant; 
 	
-	#echo __DIR__;
-	#return;
 	$fHandle = fopen(__DIR__.'/../../Config/Vars.tsv', 'r');
 	while(($tsvLine = fgetcsv($fHandle, 0, "\t")) !== FALSE) {
 		$config[$tsvLine[0]] = $tsvLine[1];

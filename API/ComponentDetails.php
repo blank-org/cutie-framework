@@ -3,40 +3,48 @@
 function loadComponents() {
 	global $bPublish;
 	global $bFull;
-
-	$fHandle = fopen("../../../Config/ID.tsv", "r");
-	fgetcsv($fHandle);
-	$i = 0;
+	
+	$file_path = "../../../Config/ID.tsv";
+	$fHandle = fopen($file_path, "r");
+	// Read header and convert column names to lowercase
+	$header = fgetcsv($fHandle, 0, "\t");
+	$header = array_map('strtolower', $header);
+	
+	$component = array();
 	while(($tsvLine = fgetcsv($fHandle, 0, "\t")) !== FALSE) {
-		if($tsvLine[0] == "#") {
+		// Use "draft" as the marker for non-published rows
+		if($tsvLine[0] == "draft") {
 			if($bFull)
 				array_shift($tsvLine);
 			else
 				continue;
 		}
-		for($j = 0; $j < count($tsvLine); $j++)
-			$component[$i][$j] = $tsvLine[$j];
-		$i++;
+		$row = array();
+		for($j = 0; $j < count($header); $j++) {
+			$row[$header[$j]] = isset($tsvLine[$j]) ? $tsvLine[$j] : "";
+		}
+		$component[] = $row;
 	}
-
+	fclose($fHandle);
 	return $component;
 }
 
 function getComponentIndex($id) {
 	global $component;
 	
-	for($i = 0; $i < count($component); $i++)
-		if($component[$i][0] == $id)
-				return $i;
-				
-	exit_404("Wrong ID"." : ".$id);
+	for($i = 0; $i < count($component); $i++) {
+		if($component[$i]['id'] == $id)
+			return $i;
+	}
+	exit_404("Wrong ID : ".$id);
 }
 
 function getComponentPageLabel($id) {
 	global $component;
 	$componentPageLabel = getComponentLabel($id);
 	$id_index = getComponentIndex($id);
-	if( count($component[$id_index]) > 5 && in_array( 'HIDE_TITLE', explode(' ', $component[$id_index][5]) ) )
+	// If description contains 'hide_title' (case-insensitive) then return empty label
+	if(count($component[$id_index]) > 5 && in_array('hide_title', explode(' ', strtolower($component[$id_index]['description']))))
 		return '';
 	else
 		return $componentPageLabel;
@@ -45,48 +53,45 @@ function getComponentPageLabel($id) {
 function isComponentExternRoot($id) {
 	global $component;
 	$id_index = getComponentIndex($id);
-	return ( $id == 'root' && count($component[$id_index]) > 5 && in_array( 'EXTERNAL', explode(' ', $component[$id_index][5]) ) );	
+	return ( $id == 'root' && count($component[$id_index]) > 5 && in_array('external', explode(' ', strtolower($component[$id_index]['description']))));
 }
 
 function getComponentLabel($id) {
 	global $component;
-
 	if($id == '')
 		return '';
 	else
-		return $component[getComponentIndex($id)][1];
+		return $component[getComponentIndex($id)]['label'];
 }
 
 function getComponentTitle($id) {
 	global $component;
-
 	if($id == '')
 		return '';
 	else
-		return $component[getComponentIndex($id)][2];
+		return $component[getComponentIndex($id)]['title'];
 }
 
 function getComponentDesc($id) {
 	global $component;
-	return $component[getComponentIndex($id)][4];
+	return $component[getComponentIndex($id)]['description'];
 }
 
 function getComponentModeASYNC($id) {
 	global $component;
-	return $component[getComponentIndex($id)][3];
+	return $component[getComponentIndex($id)]['js'];
 }
 
 function getSubComponents($id) {
 	global $component;
-
 	$pattern = "#".$id."\/[^\/]+$#";
 	$matches = array_filter($component, function($a) use($pattern)  {
-		return preg_grep($pattern, $a);
+		return preg_match($pattern, $a['id']);
 	});
 
-	$ary = [];
-	foreach ($matches as $key => $value) {
-		array_push($ary, array($value[0], $value[1]));
+	$ary = array();
+	foreach ($matches as $value) {
+		array_push($ary, array($value['id'], $value['label']));
 	}
 	return $ary;
 }
@@ -107,13 +112,13 @@ function getComponentPathStylized($id) {
 	$idStack = "";
 	$x = explode("/", $id);
 	array_pop($x);
-	foreach ($x as $key => $value) {
+	foreach ($x as $value) {
 		$idStack = $idStack.$value;
-		$x = array();
-		array_push($x, $idStack);
-		array_push($x, getComponentLabel($idStack));
-		array_push($pathStack, $x);
-		$idStack = $idStack."/";
+		$entry = array();
+		$entry[] = $idStack;
+		$entry[] = getComponentLabel($idStack);
+		array_push($pathStack, $entry);
+		$idStack = $idStack."/";	
 	}
 	return $pathStack;
 }
@@ -146,62 +151,62 @@ function getPrevId($id) {
 	global $component;
 	$found = false;
 	for($i = count($component)-1; $i >= 0; $i--) {
-		if($found == false && $component[$i][0] == $id)
+		if(!$found && $component[$i]['id'] == $id)
 			$found = true;
-		if($found == true) {
+		if($found) {
 			if($i == 0)
 				return "";
-			else if( count($component[$i-1]) > 5 && in_array( 'HIDDEN', explode(' ', $component[$i-1][5]) ) )
+			else if(count($component[$i-1]) > 5 && in_array('hidden', explode(' ', strtolower($component[$i-1]['description']))))
 				$i--;
-			else if(getParentId($id) == getParentId($component[$i-1][0]))
-				return $component[$i-1][0];
+			else if(getParentId($id) == getParentId($component[$i-1]['id']))
+				return $component[$i-1]['id'];
 		}
 	}
-	exit_404("Wrong ID"." : ".$id);
+	exit_404("Wrong ID : ".$id);
 }
 
 function getNextId($id) {
 	global $component;
 	$found = false;
 	for($i = 0; $i < count($component); $i++) {
-		if($found == false && $component[$i][0] == $id)
+		if(!$found && $component[$i]['id'] == $id)
 			$found = true;
-		if($found == true) {
+		if($found) {
 			if($i == count($component)-1)
 				return "";
-			else if( count($component[$i+1]) > 5 && in_array( 'HIDDEN', explode(' ', $component[$i+1][5]) ) )
+			else if(count($component[$i+1]) > 5 && in_array('hidden', explode(' ', strtolower($component[$i+1]['description']))))
 				$i++;
-			else if(getParentId($id) == getParentId($component[$i+1][0]))
-				return $component[$i+1][0];
+			else if(getParentId($id) == getParentId($component[$i+1]['id']))
+				return $component[$i+1]['id'];
 		}
 	}
-	exit_404("Wrong ID"." : ".$id);
+	exit_404("Wrong ID : ".$id);
 }
 
 function getComponentImage($id) {
 	$bIndex;
 	$ext;
-	if(file_exists('../../Resource/'.$id.'.'.'jpg')) {
+	if(file_exists('../../Resource/'.$id.'.jpg')) {
 		$ext = 'jpg';
 		$bIndex = false;
 	}
-	else if(file_exists('../../Resource/'.$id.'.'.'png')) {
+	else if(file_exists('../../Resource/'.$id.'.png')) {
 		$ext = 'png';
 		$bIndex = false;
 	}
-	else if(file_exists('../../Resource/'.$id.'.'.'svg')) {
+	else if(file_exists('../../Resource/'.$id.'.svg')) {
 		$ext = 'svg';
 		$bIndex = false;
 	}
-	else if(file_exists('../../Resource/'.$id.'/'.'Index'.'.'.'jpg')) {
+	else if(file_exists('../../Resource/'.$id.'/Index.jpg')) {
 		$ext = 'jpg';
 		$bIndex = true;
 	}
-	else if(file_exists('../../Resource/'.$id.'/'.'Index'.'.'.'png')) {
+	else if(file_exists('../../Resource/'.$id.'/Index.png')) {
 		$ext = 'png';
 		$bIndex = true;
 	}
-	else if(file_exists('../../Resource/'.$id.'/'.'Index'.'.'.'svg')) {
+	else if(file_exists('../../Resource/'.$id.'/Index.svg')) {
 		$ext = 'svg';
 		$bIndex = true;
 	}
@@ -209,9 +214,9 @@ function getComponentImage($id) {
 		return null;
 	}
 
-	$arr = [];
-	$arr['file_path'] = '../../Resource/'.$id.($bIndex? '/'.'Index' : null).'.'.$ext;
-	$arr['url_path'] = $id.($bIndex? '/'.'index' : null).'.'.$ext;
+	$arr = array();
+	$arr['file_path'] = '../../Resource/'.$id.($bIndex? '/Index' : '').'.'.$ext;
+	$arr['url_path'] = $id.($bIndex? '/index' : '').'.'.$ext;
 	$arr['ext'] = $ext;
 
 	return $arr;

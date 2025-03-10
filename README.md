@@ -4,7 +4,7 @@ Cutie - Framework
 Framework for thin and light website
 
 - Must be placed within 'Website' directory
-	
+
 Directory structure
 -------------------
 	
@@ -26,7 +26,7 @@ Directory structure
 	    └───Fragment
 	
 File structure
------------------------------
+--------------
 	Framework									The standard framework part (Usually not to be modified)
 	|
 	│   README.md
@@ -157,3 +157,9 @@ File structure
 	            Project_title.php
 	            Sentry_exec.php
 	            Sentry_version.php
+Overrides
+---------
+
+#### CSS  
+place *css* overrides in project `css` dir
+

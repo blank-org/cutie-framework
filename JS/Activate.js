@@ -12,6 +12,9 @@ var activateMenuFn = function() {
 	document.getElementById('menu-button').classList.add('active');
 	activeNav = 'pml-open';
 	var height = document.getElementById('nav-menu').scrollHeight;
+	var frameHeight = document.getElementById('canvas-wrapper-inner-container').clientHeight;
+	if(height < frameHeight)
+		height = frameHeight;
 	document.getElementById('canvas-main').style.maxHeight = height+'px';
 	document.getElementById('nav-menu').style.maxHeight = null;
 	menuActive = true;

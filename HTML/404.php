@@ -43,6 +43,14 @@
 		line-height: 1.1em;
 		color: #7F7F7F;
 	}
+	h2 {
+		text-align: center;
+		font-size: 2em;
+		line-height: 1.1em;
+		color: #d58787ff;
+		margin: 0.5em 0 0 0;
+
+	}
 	p {
 		margin-left: auto;
 		margin-right: auto;
@@ -70,7 +78,8 @@
 	</style>
 </head>
 <body>
-	<h1>Page Not Found</h1>
+	<h1>Uh oh, Page Not Found</h1>
+	<h2>Error 404</h2>
 	<p>
 		This specified file was not found on this website:
 		<div id='url'></div>

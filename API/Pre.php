@@ -22,4 +22,8 @@
 	$id = getOrigCall();
 	if(strlen($id) == 0)
 		$id = "root";
+	else if($id == '404') {
+		require '404.php';
+		exit;
+	}
 ?>

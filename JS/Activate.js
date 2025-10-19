@@ -25,7 +25,9 @@ var activateMenuFn = function() {
 }
 
 var activateMenu = function() {
-	activateMenuFn();
+    // Update URL to /menu when user opens the menu
+    recordState('menu', '');
+    activateMenuFn();
 }
 
 var activateMainFn = function() {

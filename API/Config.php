@@ -5,7 +5,9 @@ function loadConfig() {
 	
 	$fHandle = fopen(__DIR__.'/../../Config/Vars.tsv', 'r');
 	while(($tsvLine = fgetcsv($fHandle, 0, "\t")) !== FALSE) {
-		$config[$tsvLine[0]] = $tsvLine[1];
+		if(isset($tsvLine[0], $tsvLine[1])) {
+			$config[trim($tsvLine[0])] = trim($tsvLine[1]);
+		}
 	}
 	fclose($fHandle);
 	
@@ -13,7 +15,9 @@ function loadConfig() {
 	if(file_exists($config_variant_fpath)) {
 		$fHandle = fopen($config_variant_fpath, 'r');
 		while(($tsvLine = fgetcsv($fHandle, 0, "\t")) !== FALSE) {
-			$config[$tsvLine[0]] = $tsvLine[1];
+			if(isset($tsvLine[0], $tsvLine[1])) {
+				$config[trim($tsvLine[0])] = trim($tsvLine[1]);
+			}
 		}
 		fclose($fHandle);
 	}

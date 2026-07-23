@@ -3,8 +3,13 @@
 function loadComponents() {
 	global $bPublish;
 	global $bFull;
-	
-	$file_path = "../../../Config/ID.tsv";
+	global $lang;
+
+	$suffix = ($lang && $lang !== 'en') ? '_' . $lang : '';
+	$file_path = "../../../Config/ID{$suffix}.tsv";
+	if (!file_exists($file_path)) {
+		$file_path = "../../../Config/ID.tsv";
+	}
 	$fHandle = fopen($file_path, "r");
 	// Read header and convert column names to lowercase
 	$header = fgetcsv($fHandle, 0, "\t");
@@ -77,6 +82,38 @@ function getComponentDesc($id) {
 	return $component[getComponentIndex($id)]['description'];
 }
 
+function isArticleComponent($id) {
+	global $component;
+	if($id == '' || $id == 'root')
+		return false;
+	$id_index = getComponentIndex($id);
+	return isset($component[$id_index]['type']) && strtolower($component[$id_index]['type']) == 'article';
+}
+
+function getPrevArticleId($id) {
+	global $component;
+	if(!isArticleComponent($id))
+		return '';
+	$id_index = getComponentIndex($id);
+	for($i = $id_index - 1; $i >= 0; $i--) {
+		if(isset($component[$i]['type']) && strtolower($component[$i]['type']) == 'article')
+			return $component[$i]['id'];
+	}
+	return '';
+}
+
+function getNextArticleId($id) {
+	global $component;
+	if(!isArticleComponent($id))
+		return '';
+	$id_index = getComponentIndex($id);
+	for($i = $id_index + 1; $i < count($component); $i++) {
+		if(isset($component[$i]['type']) && strtolower($component[$i]['type']) == 'article')
+			return $component[$i]['id'];
+	}
+	return '';
+}
+
 function getComponentModeASYNC($id) {
 	global $component;
 	return $component[getComponentIndex($id)]['js'];
@@ -97,6 +134,22 @@ function getSubComponents($id) {
 }
 
 function getComponentPath($id) {
+	global $lang;
+
+	// Try language-specific path first for non-English
+	if ($lang && $lang !== 'en') {
+		$s = "../../HTML/Component/{$lang}/".str_replace(' ','_', $id);
+		if(file_exists($s)) {
+			$s = $s."/Index";
+		}
+		if(file_exists($s.".php"))
+			return ($s.".php");
+		else if(file_exists($s.".html"))
+			return ($s.".html");
+		// Fall through to English
+	}
+
+	// English / fallback
 	$s = "../../HTML/Component/".str_replace(' ','_', $id);
 	if(file_exists($s)) {
 		$s = $s."/Index";
@@ -124,17 +177,21 @@ function getComponentPathStylized($id) {
 }
 
 function getComponentURLtrimmed($id) {
+	global $lang;
+	$prefix = ($lang && $lang !== 'en') ? '/' . $lang : '';
 	if($id == 'root')
-		return "";
+		return $prefix;
 	else
-		return ("/".$id);
+		return ($prefix."/".$id);
 }
 
 function getComponentURL($id) {
+	global $lang;
+	$prefix = ($lang && $lang !== 'en') ? '/' . $lang : '';
 	if($id == 'root')
-		return "/";
+		return $prefix."/";
 	else
-		return ("/".$id);
+		return ($prefix."/".$id);
 }
 
 function getParentId($id) {

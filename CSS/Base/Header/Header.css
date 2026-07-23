@@ -59,11 +59,24 @@
 	display: inline-block
 }
 
+#header-left-list {
+	text-align: center;
+	margin: auto;
+	padding: 0 0 0 6px;
+	overflow: hidden;
+	display: inline-block;
+	float: left
+}
+
+#header-left-list > div {
+	display: inline-block
+}
+
 #header-right-list {
 	text-align: center;
 	margin: auto;
 	padding: 0 6px 0 0;
-	overflow: hidden;
+	overflow: visible;
 	display: inline-block;
 	float: right
 }

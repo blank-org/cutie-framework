@@ -1,8 +1,21 @@
 var curRequestId = 0;
 
 function loadCanvasI(m) {
+	if(this.classList.contains('article-title-nav-disabled')) {
+		signalDisabledArticleNavigation(this);
+		return false;
+	}
 	loadCanvasH(this);
 	return false;
+}
+
+function signalDisabledArticleNavigation(link) {
+	link.classList.remove('article-title-nav-denied');
+	void link.offsetWidth;
+	link.classList.add('article-title-nav-denied');
+	setTimeout(function() {
+		link.classList.remove('article-title-nav-denied');
+	}, 380);
 }
 
 function loadCanvasH(e) {
@@ -63,9 +76,9 @@ function loadCanvas(target, title) {
 					var resp = JSON.parse(xmlhttp.responseText);
 					document.title = resp.desc + ' - ' + PROJECT_TITLE;
 					if(target == 'root')
-						updatePathTitle('', '&nbsp;');
+						updatePathTitle('', '&nbsp;', resp.prevArticle, resp.nextArticle);
 					else
-						updatePathTitle(resp.path, title);
+						updatePathTitle(resp.path, title, resp.prevArticle, resp.nextArticle);
 					syncScrollReload(startTime, resp, target);
 				} break;
 				case 404: {
@@ -147,10 +160,36 @@ function getTimeOutDuration(elapsed) {
 		return timeout;
 }
 
-function updatePathTitle(path, title) {
+function updateArticleNavigationLink(linkId, article, direction) {
+	var link = document.getElementById(linkId);
+	if(article == null) {
+		link.classList.add('article-title-nav-disabled');
+		link.removeAttribute('href');
+		link.removeAttribute('data-target');
+		link.removeAttribute('data-title');
+		link.removeAttribute('title');
+		link.setAttribute('aria-label', 'No ' + direction.toLowerCase() + ' article');
+		link.setAttribute('aria-disabled', 'true');
+		link.setAttribute('tabindex', '-1');
+		return;
+	}
+
+	link.classList.remove('article-title-nav-disabled');
+	link.setAttribute('href', article.url);
+	link.setAttribute('data-target', article.id);
+	link.setAttribute('data-title', article.label);
+	link.setAttribute('title', direction + ' article');
+	link.setAttribute('aria-label', direction + ' article');
+	link.removeAttribute('aria-disabled');
+	link.setAttribute('tabindex', '0');
+}
+
+function updatePathTitle(path, title, prevArticle, nextArticle) {
 	setTimeout(function() {
 		document.getElementById('path').innerHTML = path;
 		document.getElementById('title').innerHTML = title;
+		updateArticleNavigationLink('article-prev', prevArticle, 'Previous');
+		updateArticleNavigationLink('article-next', nextArticle, 'Next');
 		document.getElementById('path').classList.remove('hide');
 		document.getElementById('title').classList.remove('hide');
 	}, 300);

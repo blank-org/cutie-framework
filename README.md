@@ -163,3 +163,10 @@ Overrides
 #### CSS  
 place *css* overrides in project `css` dir
 
+#### Debug:
+to debug local rewrite path
+in .htaccess change
+
+RewriteRule ^(.*?)\.jpg$ Resource/$1/index.jpg [L]
+to
+RewriteRule ^(.*?)\.jpg$ Resource/$1/index.jpg [R=302,L]

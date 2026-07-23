@@ -19,6 +19,7 @@
 
 	$config = loadConfig();
 
+	$lang = getLanguage();
 	$id = getOrigCall();
 	if(strlen($id) == 0)
 		$id = "root";

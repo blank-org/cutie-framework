@@ -1,5 +1,11 @@
 div#title-container {
 	text-align: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0 28px;
+	box-sizing: border-box;
+	min-height: 58px;
 	transition: all 0.3s;
 	will-change: opacity, scaleY;
 	max-height: 58px;
@@ -7,6 +13,102 @@ div#title-container {
 
 h1#title {
 	display: inline-block;
+	flex: 0 1 auto;
+	max-width: calc(100% - 144px);
 	transition: all 0.3s;
 	will-change: opacity, scaleY;
+}
+
+.article-title-nav {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	align-self: stretch;
+	flex: 1 1 0;
+	min-width: 44px;
+	background: transparent;
+	outline: none;
+}
+
+#article-prev {
+	justify-content: flex-start;
+}
+
+#article-next {
+	justify-content: flex-end;
+}
+
+.article-title-nav .image {
+	opacity: 0;
+	transform: scale(0.88);
+	transition: opacity 0.2s, transform 0.2s;
+}
+
+.article-title-nav .image,
+.article-title-nav svg {
+	display: block;
+	width: 18px;
+	height: 18px;
+}
+
+.article-title-nav path {
+	fill: #69b7cf;
+	transition: fill 0.2s;
+}
+
+.article-title-nav:hover .image,
+.article-title-nav:focus-visible .image {
+	opacity: 1;
+	transform: scale(1.18);
+}
+
+.article-title-nav-disabled {
+	cursor: default;
+}
+
+.article-title-nav-disabled:hover .image {
+	transform: scale(1);
+}
+
+.article-title-nav-disabled path {
+	fill: #c8c8c8;
+}
+
+.article-title-nav-denied .image {
+	opacity: 1;
+	animation: article-title-nav-shake 0.38s ease-in-out;
+}
+
+@keyframes article-title-nav-shake {
+	0%, 100% {
+		transform: translateX(0) scale(1);
+	}
+	25% {
+		transform: translateX(-5px) scale(1);
+	}
+	50% {
+		transform: translateX(5px) scale(1);
+	}
+	75% {
+		transform: translateX(-3px) scale(1);
+	}
+}
+
+.hide_path_title_updated .article-title-nav .image {
+	opacity: 0 !important;
+}
+
+@media only screen and (max-width: 600px) {
+	div#title-container {
+		padding-right: 8px;
+		padding-left: 8px;
+	}
+
+	h1#title {
+		max-width: calc(100% - 112px);
+	}
+
+	.article-title-nav {
+		min-width: 40px;
+	}
 }

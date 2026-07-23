@@ -55,23 +55,36 @@ function init() {
 			}
 		} );
 	
+		var lang_switcher = document.querySelector('#language-switcher'),
+			lang_has_native = lang_switcher && lang_switcher.querySelector('.lang-link');
+
 		translate_button.addEventListener( 'click', function() {
 			if(typeof isTranslateButtonActive === 'undefined') {
-				var scriptTag = document.createElement('script');
-				scriptTag.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
-				// scriptTag.onload = implementationCode;
-				// scriptTag.onreadystatechange = implementationCode;
-				translate_button.parentNode.appendChild(scriptTag);
+				// If native translations available, show language switcher
+				// Otherwise fall back to Google Translate
+				if (!lang_has_native) {
+					var scriptTag = document.createElement('script');
+					scriptTag.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+					translate_button.parentNode.appendChild(scriptTag);
+				}
 				isTranslateButtonActive = false;
 			}
 			if(!isTranslateButtonActive) {
 				translate_button.classList.add('header-button-active');
-				translate_box.classList.remove('hide_display');
+				if (lang_has_native) {
+					lang_switcher.classList.remove('hide_display');
+				} else {
+					translate_box.classList.remove('hide_display');
+				}
 				isTranslateButtonActive = true;
 			}
 			else {
 				translate_button.classList.remove('header-button-active');
-				translate_box.classList.add('hide_display');
+				if (lang_has_native) {
+					lang_switcher.classList.add('hide_display');
+				} else {
+					translate_box.classList.add('hide_display');
+				}
 				isTranslateButtonActive = false;
 			}
 		} );
@@ -119,6 +132,9 @@ function init() {
 			// or even .className += ' no-svg'; for deeper support
 		}
 	
+		if(typeof initDarkMode !== 'undefined')
+			initDarkMode();
+
 		initPageFunction(curTab);
 		return false;
 

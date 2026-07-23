@@ -17,12 +17,25 @@
 	else
 		$bFull = FALSE;
 
+	$lang = getLanguage();
 	$component = loadComponents();
 
 	$id = substr(getOrigCall(), 0, -5); //stripping extension part
 	$file = getComponentPath($id);
 	$desc = getComponentDesc($id);
 	$date = getFileDate($file);
+	$prev_article_id = getPrevArticleId($id);
+	$next_article_id = getNextArticleId($id);
+	$prev_article = ($prev_article_id == '') ? null : array(
+		'id' => $prev_article_id,
+		'label' => getComponentLabel($prev_article_id),
+		'url' => getComponentURL($prev_article_id)
+	);
+	$next_article = ($next_article_id == '') ? null : array(
+		'id' => $next_article_id,
+		'label' => getComponentLabel($next_article_id),
+		'url' => getComponentURL($next_article_id)
+	);
 	
 	header('Content-type: application/json; charset=utf-8');
 
@@ -75,6 +88,12 @@
 	echo "\"";
 	echo getComponentDesc($id);
 	echo "\"";
+	echo ",";
+	echo "\"prevArticle\":";
+	echo json_encode($prev_article);
+	echo ",";
+	echo "\"nextArticle\":";
+	echo json_encode($next_article);
 	echo ",";
 	echo "\"content\":";
 	echo json_encode($fileContent);

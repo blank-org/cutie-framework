@@ -5,6 +5,22 @@ Framework for thin and light website
 
 - Must be placed within 'Website' directory
 
+Component text fields
+---------------------
+
+Component records distinguish between three kinds of text:
+
+- `Label` is the short, visible name used for the page heading, navigation
+  tiles, breadcrumbs, and AJAX navigation.
+- `Title` is a concise URL-sharing title. It is intended for Open Graph,
+  Twitter, messaging previews, and similar metadata, and should generally be
+  shorter than the description.
+- `Description` is the longer summary of the component. A site template may
+  also use it when constructing the browser document title.
+
+Do not use `Title` as the visible page heading or navigation label. Article
+navigation passes the neighboring component's `Label`.
+
 Directory structure
 -------------------
 	

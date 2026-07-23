@@ -4,12 +4,22 @@
 	overflow: hidden;
 	width: 50%;
 	transform: translateX(-100%);
-	display: inline-block;
+	display: flex;
 	float: left;
 	transition: all 0.7s;
 	will-change: transform;
 }
 
 .sidebar-sub {
-	text-align: center
+	text-align: left;
+}
+
+#nav-menu .sidebar-nav-group {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+}
+
+#nav-menu .sidebar-nav-group + .sidebar-nav-group {
+	margin-top: 24px;
 }

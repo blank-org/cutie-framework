@@ -43,6 +43,11 @@ html.dark-mode .bold {
 	color: #aaa;
 }
 
+html.dark-mode ul.list-bullet > li > div,
+html.dark-mode ol.list-bullet > li > div {
+	color: #b8b8b8;
+}
+
 /* Links */
 html.dark-mode .content-link-gray, html.dark-mode .link-gray {
 	color: #666 !important;

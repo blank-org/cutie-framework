@@ -145,7 +145,7 @@ function getComponentPath($id) {
 	if ($lang && $lang !== 'en') {
 		$s = "../../HTML/Component/{$lang}/".str_replace(' ','_', $id);
 		if(file_exists($s)) {
-			$s = $s."/Index";
+			$s = $s."/index";
 		}
 		if(file_exists($s.".php"))
 			return ($s.".php");
@@ -157,7 +157,7 @@ function getComponentPath($id) {
 	// English / fallback
 	$s = "../../HTML/Component/".str_replace(' ','_', $id);
 	if(file_exists($s)) {
-		$s = $s."/Index";
+		$s = $s."/index";
 	}
 	if(file_exists($s.".php"))
 		return ($s.".php");

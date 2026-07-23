@@ -10,7 +10,7 @@
 	<meta http-equiv='Content-Type' content="text/html; charset=UTF-8" >
 	<title>Page Not Found<?php echo ' - '.$config['project_title'] ?></title>
 	<?php
-		if($bPublish) {
+		if($bPublish && !empty($config['google_tag_id'])) {
 			require '../JS/Fragment/GA_headScript.php';
 		}
 	?>

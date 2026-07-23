@@ -88,7 +88,9 @@ function isArticleComponent($id) {
 	if($id == '' || $id == 'root')
 		return false;
 	$id_index = getComponentIndex($id);
-	return isset($component[$id_index]['type']) && strtolower($component[$id_index]['type']) == 'article';
+	if(!array_key_exists('type', $component[$id_index]))
+		return true;
+	return strtolower(trim($component[$id_index]['type'])) == 'article';
 }
 
 function getPrevArticleId($id) {
@@ -96,8 +98,9 @@ function getPrevArticleId($id) {
 	if(!isArticleComponent($id))
 		return '';
 	$id_index = getComponentIndex($id);
+	$parent_id = getParentId($id);
 	for($i = $id_index - 1; $i >= 0; $i--) {
-		if(isset($component[$i]['type']) && strtolower($component[$i]['type']) == 'article')
+		if(getParentId($component[$i]['id']) == $parent_id && isArticleComponent($component[$i]['id']))
 			return $component[$i]['id'];
 	}
 	return '';
@@ -108,8 +111,9 @@ function getNextArticleId($id) {
 	if(!isArticleComponent($id))
 		return '';
 	$id_index = getComponentIndex($id);
+	$parent_id = getParentId($id);
 	for($i = $id_index + 1; $i < count($component); $i++) {
-		if(isset($component[$i]['type']) && strtolower($component[$i]['type']) == 'article')
+		if(getParentId($component[$i]['id']) == $parent_id && isArticleComponent($component[$i]['id']))
 			return $component[$i]['id'];
 	}
 	return '';

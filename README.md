@@ -21,6 +21,12 @@ Component records distinguish between three kinds of text:
 Do not use `Title` as the visible page heading or navigation label. Article
 navigation passes the neighboring component's `Label`.
 
+`Type` is optional for compatibility with existing component indexes. When it
+is present, article navigation includes only same-level rows whose type is
+`article`. When it is absent, same-level component rows are treated as
+articles.
+
+
 Directory structure
 -------------------
 	

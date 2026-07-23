@@ -93,7 +93,11 @@
 	text-decoration: none;
 	text-align: left;
 	line-height: 64px;
-	transition: all ease-out 0.3s;
+	transition:
+		transform 0.75s,
+		border-color 0.3s ease-out,
+		background-color 0.3s ease-out,
+		color 0.3s ease-out;
 }
 
 .item_block div, .item_block_text div {

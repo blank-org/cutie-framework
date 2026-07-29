@@ -12,11 +12,11 @@ function loadComponents() {
 	}
 	$fHandle = fopen($file_path, "r");
 	// Read header and convert column names to lowercase
-	$header = fgetcsv($fHandle, 0, "\t");
+	$header = fgetcsv($fHandle, 0, "\t", "\"", "\\");
 	$header = array_map('strtolower', $header);
 	
 	$component = array();
-	while(($tsvLine = fgetcsv($fHandle, 0, "\t")) !== FALSE) {
+	while(($tsvLine = fgetcsv($fHandle, 0, "\t", "\"", "\\")) !== FALSE) {
 		// Use "draft" as the marker for non-published rows
 		if($tsvLine[0] == "draft") {
 			if($bFull)

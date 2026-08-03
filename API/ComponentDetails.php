@@ -5,32 +5,42 @@ function loadComponents() {
 	global $bFull;
 	global $lang;
 
-	$suffix = ($lang && $lang !== 'en') ? '_' . $lang : '';
-	$file_path = "../../../Config/ID{$suffix}.tsv";
-	if (!file_exists($file_path)) {
-		$file_path = "../../../Config/ID.tsv";
-	}
-	$fHandle = fopen($file_path, "r");
-	// Read header and convert column names to lowercase
-	$header = fgetcsv($fHandle, 0, "\t", "\"", "\\");
-	$header = array_map('strtolower', $header);
-	
-	$component = array();
-	while(($tsvLine = fgetcsv($fHandle, 0, "\t", "\"", "\\")) !== FALSE) {
-		// Use "draft" as the marker for non-published rows
-		if($tsvLine[0] == "draft") {
-			if($bFull)
-				array_shift($tsvLine);
-			else
-				continue;
+	$read_components = function($file_path) use ($bFull) {
+		$fHandle = fopen($file_path, "r");
+		$header = array_map('strtolower', fgetcsv($fHandle, 0, "\t", "\"", "\\"));
+		$rows = array();
+		while(($tsvLine = fgetcsv($fHandle, 0, "\t", "\"", "\\")) !== FALSE) {
+			if($tsvLine[0] == "draft") {
+				if($bFull)
+					array_shift($tsvLine);
+				else
+					continue;
+			}
+			$row = array();
+			for($j = 0; $j < count($header); $j++)
+				$row[$header[$j]] = isset($tsvLine[$j]) ? $tsvLine[$j] : "";
+			$rows[] = $row;
 		}
-		$row = array();
-		for($j = 0; $j < count($header); $j++) {
-			$row[$header[$j]] = isset($tsvLine[$j]) ? $tsvLine[$j] : "";
+		fclose($fHandle);
+		return $rows;
+	};
+
+	$component = $read_components("../../../Config/ID.tsv");
+	if ($lang && $lang !== 'en') {
+		$translated_path = "../../../Config/ID_{$lang}.tsv";
+		if (file_exists($translated_path)) {
+			$translated = $read_components($translated_path);
+			$indexes = array();
+			foreach ($component as $index => $row)
+				$indexes[$row['id']] = $index;
+			foreach ($translated as $row) {
+				if (isset($indexes[$row['id']]))
+					$component[$indexes[$row['id']]] = $row;
+				else
+					$component[] = $row;
+			}
 		}
-		$component[] = $row;
 	}
-	fclose($fHandle);
 	return $component;
 }
 

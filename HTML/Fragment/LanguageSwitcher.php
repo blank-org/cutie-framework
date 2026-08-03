@@ -1,5 +1,5 @@
 <?php
-	$translations_path = __DIR__ . '/../../../Config/Translations.tsv';
+	$translations_path = __DIR__ . '/../../../../Config/Translations.tsv';
 	$available_translations = array();
 	if (file_exists($translations_path)) {
 		$fHandle = fopen($translations_path, 'r');
@@ -21,7 +21,7 @@
 
 	$lang_names = array('en' => 'English', 'hi' => 'हिन्दी', 'hi-in' => 'हिन्दी (भारत)');
 ?>
-<div id='language-switcher' class='hide_display'>
+<div id='language-switcher'>
 <?php if (!empty($available_translations)) { ?>
 	<?php foreach ($available_translations as $alt_lang) {
 		$prefix = ($alt_lang === 'en') ? '' : '/' . $alt_lang;
@@ -32,7 +32,5 @@
 	?>
 	<a href='<?php echo $href ?>' class='lang-link'><?php echo $name ?></a>
 	<?php } ?>
-<?php } else { ?>
-	<div class='lang-unavailable'>Google Translate</div>
 <?php } ?>
 </div>

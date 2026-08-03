@@ -1,5 +1,5 @@
 <?php
-	$translations_path = __DIR__ . '/../../../Config/Translations.tsv';
+	$translations_path = __DIR__ . '/../../../../Config/Translations.tsv';
 	if (file_exists($translations_path)) {
 		$fHandle = fopen($translations_path, 'r');
 		$header = fgetcsv($fHandle, 0, "\t", "\"", "\\");

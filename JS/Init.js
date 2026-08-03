@@ -1,8 +1,19 @@
 function initLoad() {
-	if(!initLoadDone && document.readyState === 'interactive') {
+	if(!initLoadDone && document.readyState !== 'loading') {
 		init();
 		initLoadDone = true;
 	}
+}
+
+function prepareGoogleTranslate(translate_button) {
+	if(document.querySelector('script[data-google-translate]'))
+		return;
+
+	var scriptTag = document.createElement('script');
+	scriptTag.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+	scriptTag.async = true;
+	scriptTag.setAttribute('data-google-translate', '');
+	translate_button.parentNode.appendChild(scriptTag);
 }
 
 function init() {
@@ -56,12 +67,8 @@ function init() {
 		} );
 	
 		translate_button.addEventListener( 'click', function() {
-			if(typeof isTranslateButtonActive === 'undefined') {
-				var scriptTag = document.createElement('script');
-				scriptTag.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
-				translate_button.parentNode.appendChild(scriptTag);
+			if(typeof isTranslateButtonActive === 'undefined')
 				isTranslateButtonActive = false;
-			}
 			if(!isTranslateButtonActive) {
 				translate_button.classList.add('header-button-active');
 				translate_box.classList.remove('hide_display');
@@ -119,6 +126,8 @@ function init() {
 	
 		if(typeof initDarkMode !== 'undefined')
 			initDarkMode();
+
+		prepareGoogleTranslate(translate_button);
 
 		initPageFunction(curTab);
 		return false;

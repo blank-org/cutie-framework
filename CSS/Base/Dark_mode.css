@@ -218,3 +218,20 @@ html.dark-mode ::-webkit-scrollbar-thumb {
 html.dark-mode #google_translate_element {
 	background: transparent;
 }
+
+/* Google custom search */
+html.dark-mode #search_box,
+html.dark-mode #search_box .gsc-control-cse {
+	background: #1a1a2e;
+	border-color: #333;
+}
+
+html.dark-mode #search_box .gsc-input-box {
+	background: #224;
+	border-color: #33335a;
+}
+
+html.dark-mode #search_box input.gsc-input {
+	background-color: #224 !important;
+	color: #d0d0d0 !important;
+}

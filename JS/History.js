@@ -10,17 +10,17 @@ window.onpopstate = function(e) {
 function recordState(tab, title) {
 	var path;
 	if(tab != 'root')
-		path = tab;
+		path = '/'+tab;
 	else
 		path = '';
-	window.history.pushState({'id':tab, 'title':title}, '', '/'+path);
+	window.history.pushState({'id':tab, 'title':title}, '', getLanguagePrefix()+path || '/');
 }
 
 function replaceState(tab, title) {
 	var path;
 	if(tab != 'root')
-		path = tab;
+		path = '/'+tab;
 	else
 		path = '';
-	window.history.replaceState({'id':tab, 'title':title}, '', '/'+path);
+	window.history.replaceState({'id':tab, 'title':title}, '', getLanguagePrefix()+path || '/');
 }

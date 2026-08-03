@@ -1,9 +1,19 @@
 function getURLid() {
 	var loc = window.location.pathname;
+	var prefix = getLanguagePrefix();
+	if(prefix && loc.indexOf(prefix + '/') === 0)
+		loc = loc.substring(prefix.length);
+	else if(loc === prefix)
+		loc = '/';
 	if(loc == '/')
 		return '';
 	else
 		return loc.substring(1);
+}
+
+function getLanguagePrefix() {
+	var lang = document.documentElement.getAttribute('lang');
+	return lang && lang !== 'en' ? '/' + lang : '';
 }
 
 function getHashID() {

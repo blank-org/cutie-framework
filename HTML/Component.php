@@ -43,6 +43,10 @@
 	include("../HTML/Fragment/Path.php");
 	$path = ob_get_clean();
 
+	ob_start();
+	include("../HTML/Fragment/LanguageSwitcher.php");
+	$languageSwitcher = ob_get_clean();
+
 	if(endsWith($file, ".php")) {
 		$fileContent = file_get_contents($file);
 	}
@@ -94,6 +98,9 @@
 	echo ",";
 	echo "\"nextArticle\":";
 	echo json_encode($next_article);
+	echo ",";
+	echo "\"languageSwitcher\":";
+	echo json_encode($languageSwitcher);
 	echo ",";
 	echo "\"content\":";
 	echo json_encode($fileContent);

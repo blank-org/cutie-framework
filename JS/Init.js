@@ -42,7 +42,7 @@ function init() {
 		else if(URLid == 'menu')
 			replaceState('menu', '');
 		else
-			recordState(URLid, '');
+			replaceState(URLid, document.getElementById('title').textContent);
 	
 		menu_button.addEventListener( 'click', function() {
 			if (!menuActive) {

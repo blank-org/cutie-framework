@@ -97,7 +97,7 @@ function loadCanvas(target, title) {
 	}
 
 	gTarget = target;
-	xmlhttp.open('GET', '/'+target+'.json', true);
+	xmlhttp.open('GET', getLanguagePrefix()+'/'+target+'.json', true);
 	xmlhttp.setRequestHeader('Content-Type', 'text/plain;charset=UTF-8');
 	xmlhttp.send();
 
@@ -138,6 +138,12 @@ function executeReload(startTime, resp, target) {
 		clearTimeout(reloadTimeout);
 	reloadTimeout = setTimeout( function() {
 		document.getElementById('content').innerHTML = resp.content;
+		if(typeof resp.languageSwitcher !== 'undefined') {
+			var languageSwitcherResponse = document.createElement('div');
+			languageSwitcherResponse.innerHTML = resp.languageSwitcher;
+			var languageSwitcher = languageSwitcherResponse.querySelector('#language-switcher');
+			document.getElementById('language-switcher').innerHTML = languageSwitcher ? languageSwitcher.innerHTML : '';
+		}
 		document.getElementById('canvas-main').classList.remove('hide');
 		if(!URLid == '') {
 			document.getElementById('main-wrapper').classList.remove('hide_path_title_updated');

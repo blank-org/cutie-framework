@@ -166,7 +166,14 @@ function getTimeOutDuration(elapsed) {
 		return timeout;
 }
 
-function updateArticleNavigationLink(linkId, article, direction) {
+function getArticleNavigationLabel(kind) {
+	var container = document.getElementById('title-container');
+	if(!container)
+		return '';
+	return container.getAttribute('data-' + kind) || '';
+}
+
+function updateArticleNavigationLink(linkId, article, label, noneLabel) {
 	var link = document.getElementById(linkId);
 	if(article == null) {
 		link.classList.add('article-title-nav-disabled');
@@ -174,7 +181,7 @@ function updateArticleNavigationLink(linkId, article, direction) {
 		link.removeAttribute('data-target');
 		link.removeAttribute('data-title');
 		link.removeAttribute('title');
-		link.setAttribute('aria-label', 'No ' + direction.toLowerCase() + ' article');
+		link.setAttribute('aria-label', noneLabel);
 		link.setAttribute('aria-disabled', 'true');
 		link.setAttribute('tabindex', '-1');
 		return;
@@ -184,8 +191,8 @@ function updateArticleNavigationLink(linkId, article, direction) {
 	link.setAttribute('href', article.url);
 	link.setAttribute('data-target', article.id);
 	link.setAttribute('data-title', article.label);
-	link.setAttribute('title', direction + ' article');
-	link.setAttribute('aria-label', direction + ' article');
+	link.setAttribute('title', label);
+	link.setAttribute('aria-label', label);
 	link.removeAttribute('aria-disabled');
 	link.setAttribute('tabindex', '0');
 }
@@ -194,8 +201,8 @@ function updatePathTitle(path, title, prevArticle, nextArticle) {
 	setTimeout(function() {
 		document.getElementById('path').innerHTML = path;
 		document.getElementById('title').innerHTML = title;
-		updateArticleNavigationLink('article-prev', prevArticle, 'Previous');
-		updateArticleNavigationLink('article-next', nextArticle, 'Next');
+		updateArticleNavigationLink('article-prev', prevArticle, getArticleNavigationLabel('nav-prev'), getArticleNavigationLabel('nav-prev-none'));
+		updateArticleNavigationLink('article-next', nextArticle, getArticleNavigationLabel('nav-next'), getArticleNavigationLabel('nav-next-none'));
 		document.getElementById('path').classList.remove('hide');
 		document.getElementById('title').classList.remove('hide');
 	}, 300);

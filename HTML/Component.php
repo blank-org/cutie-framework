@@ -47,14 +47,12 @@
 	include("../HTML/Fragment/LanguageSwitcher.php");
 	$languageSwitcher = ob_get_clean();
 
-	if(endsWith($file, ".php")) {
-		$fileContent = file_get_contents($file);
-	}
-	else {
-		ob_start();
-		include($file);
-		$fileContent = ob_get_clean();
-	}
+	// Render components for AJAX exactly as Page.php renders them for a full request.
+	// Reading PHP components as text leaves fragment includes unexecuted, so the
+	// publish compressor strips generated images and navigation from the JSON.
+	ob_start();
+	include($file);
+	$fileContent = ob_get_clean();
 
 	if( $bPublish ) {
 		$cmd = 'java -jar'.' "'.getenv('TIGGU').'\Tools\HTML-Compressor.jar" -t html --compress-js --js-compressor closure --closure-opt-level simple --compress-css';

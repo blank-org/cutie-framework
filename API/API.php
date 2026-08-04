@@ -43,7 +43,9 @@
 	}
 
 	function endsWith($haystack, $needle) {
-		return preg_match('/' . preg_quote($haystack, '/') . '$/', $needle);
+		if(strlen($needle) > strlen($haystack))
+			return false;
+		return substr($haystack, -strlen($needle)) === $needle;
 	}
 
 	function matchExt($haystack, $needle) {

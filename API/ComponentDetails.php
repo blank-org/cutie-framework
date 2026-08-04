@@ -284,30 +284,30 @@ function getNextId($id) {
 	exit_404("Wrong ID : ".$id);
 }
 
-function getComponentImage($id) {
+function findComponentImageAt($resourceId) {
 	$bIndex;
 	$ext;
-	if(file_exists('../../Resource/'.$id.'.jpg')) {
+	if(file_exists('../../Resource/'.$resourceId.'.jpg')) {
 		$ext = 'jpg';
 		$bIndex = false;
 	}
-	else if(file_exists('../../Resource/'.$id.'.png')) {
+	else if(file_exists('../../Resource/'.$resourceId.'.png')) {
 		$ext = 'png';
 		$bIndex = false;
 	}
-	else if(file_exists('../../Resource/'.$id.'.svg')) {
+	else if(file_exists('../../Resource/'.$resourceId.'.svg')) {
 		$ext = 'svg';
 		$bIndex = false;
 	}
-	else if(file_exists('../../Resource/'.$id.'/index.jpg')) {
+	else if(file_exists('../../Resource/'.$resourceId.'/index.jpg')) {
 		$ext = 'jpg';
 		$bIndex = true;
 	}
-	else if(file_exists('../../Resource/'.$id.'/index.png')) {
+	else if(file_exists('../../Resource/'.$resourceId.'/index.png')) {
 		$ext = 'png';
 		$bIndex = true;
 	}
-	else if(file_exists('../../Resource/'.$id.'/index.svg')) {
+	else if(file_exists('../../Resource/'.$resourceId.'/index.svg')) {
 		$ext = 'svg';
 		$bIndex = true;
 	}
@@ -316,11 +316,24 @@ function getComponentImage($id) {
 	}
 
 	$arr = array();
-	$arr['file_path'] = '../../Resource/'.$id.($bIndex? '/index' : '').'.'.$ext;
-	$arr['url_path'] = $id.($bIndex? '/index' : '').'.'.$ext;
+	$arr['file_path'] = '../../Resource/'.$resourceId.($bIndex? '/index' : '').'.'.$ext;
+	$arr['url_path'] = $resourceId.($bIndex? '/index' : '').'.'.$ext;
 	$arr['ext'] = $ext;
 
 	return $arr;
+}
+
+function getComponentImage($id) {
+	global $lang;
+
+	// Prefer a language-specific asset when present; otherwise use the base image.
+	if ($lang && $lang !== 'en') {
+		$localized = findComponentImageAt($lang.'/'.$id);
+		if ($localized !== null)
+			return $localized;
+	}
+
+	return findComponentImageAt($id);
 }
 
 function getComponentMetaImage($id) {

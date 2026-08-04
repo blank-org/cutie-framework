@@ -14,6 +14,6 @@
 ?>
 <div class='content-image-container'>
 	<div class='cover-image' style='padding-bottom: <?php echo round($height/$width*100, 2)?>%'>
-		<img src='/<?php echo $id.'.'.$imageFile['ext']; ?>' alt='<?php echo $alt ?>'>
+		<img src='/<?php echo $imageFile['url_path']; ?>' alt='<?php echo $alt ?>'>
 	</div>
 </div>

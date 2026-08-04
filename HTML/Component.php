@@ -50,9 +50,7 @@
 	// Render components for AJAX exactly as Page.php renders them for a full request.
 	// Reading PHP components as text leaves fragment includes unexecuted, so the
 	// publish compressor strips generated images and navigation from the JSON.
-	ob_start();
-	include($file);
-	$fileContent = ob_get_clean();
+	$fileContent = renderComponentBody($id);
 
 	if( $bPublish ) {
 		$cmd = 'java -jar'.' "'.getenv('TIGGU').'\Tools\HTML-Compressor.jar" -t html --compress-js --js-compressor closure --closure-opt-level simple --compress-css';

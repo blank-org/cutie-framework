@@ -336,6 +336,41 @@ function getComponentImage($id) {
 	return findComponentImageAt($id);
 }
 
+
+function renderComponentBody($id) {
+	// Included article fragments expect these as locals of the caller.
+	// Requiring from inside this function needs the same globals in scope.
+	global $desc, $alt, $date, $config, $lang, $component, $bPublish;
+
+	ob_start();
+	require getComponentPath($id);
+	$html = ob_get_clean();
+
+	// Translations often omit the cover callout. If a cover image exists for
+	// this slug (language-specific or base fallback), inject the standard cover.
+	if ($id === 'root' || getComponentImage($id) === null)
+		return $html;
+	if (strpos($html, 'cover-image') !== false)
+		return $html;
+
+	$alt = $desc;
+	ob_start();
+	require __DIR__.'/../HTML/Fragment/Component_cover.php';
+	echo "\n\t<h2 class='center'>".$desc."</h2>\n";
+	$cover = ob_get_clean();
+
+	if (preg_match("/<div\\s+id=['\"]message['\"]\\s*>/", $html)) {
+		return preg_replace(
+			"/<div\\s+id=['\"]message['\"]\\s*>/",
+			"<div id='message'>\n\t\t".trim($cover),
+			$html,
+			1
+		);
+	}
+
+	return $cover.$html;
+}
+
 function getComponentMetaImage($id) {
 	$imageFile = getComponentImage($id);
 	if ($imageFile == null || $id == 'root' || $imageFile['ext'] == 'svg')

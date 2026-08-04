@@ -148,31 +148,42 @@ function getSubComponents($id) {
 	return $ary;
 }
 
+function resolveComponentFile($base) {
+	// Prefer directory/index.* when the index actually exists. An empty
+	// directory must not shadow a sibling flat file (e.g. root/ vs Root.php).
+	if (is_dir($base)) {
+		if (file_exists($base."/index.php"))
+			return $base."/index.php";
+		if (file_exists($base."/index.html"))
+			return $base."/index.html";
+	}
+	if (file_exists($base.".php"))
+		return $base.".php";
+	if (file_exists($base.".html"))
+		return $base.".html";
+	return null;
+}
+
 function getComponentPath($id) {
 	global $lang;
 
+	$idPath = str_replace(' ', '_', $id);
+
 	// Try language-specific path first for non-English
 	if ($lang && $lang !== 'en') {
-		$s = "../../HTML/Component/{$lang}/".str_replace(' ','_', $id);
-		if(file_exists($s)) {
-			$s = $s."/index";
-		}
-		if(file_exists($s.".php"))
-			return ($s.".php");
-		else if(file_exists($s.".html"))
-			return ($s.".html");
+		$resolved = resolveComponentFile("../../HTML/Component/{$lang}/".$idPath);
+		if ($resolved !== null)
+			return $resolved;
 		// Fall through to English
 	}
 
 	// English / fallback
-	$s = "../../HTML/Component/".str_replace(' ','_', $id);
-	if(file_exists($s)) {
-		$s = $s."/index";
-	}
-	if(file_exists($s.".php"))
-		return ($s.".php");
-	else
-		return ($s.".html");
+	$resolved = resolveComponentFile("../../HTML/Component/".$idPath);
+	if ($resolved !== null)
+		return $resolved;
+
+	// Preserve prior missing-file behavior for callers that still stat the path.
+	return "../../HTML/Component/".$idPath.".html";
 }
 
 function getComponentPathStylized($id) {

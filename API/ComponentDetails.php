@@ -4,6 +4,9 @@ function loadComponents() {
 	global $bPublish;
 	global $bFull;
 	global $lang;
+	global $localizedComponentIds;
+
+	$localizedComponentIds = null;
 
 	$read_components = function($file_path) use ($bFull) {
 		$fHandle = fopen($file_path, "r");
@@ -30,10 +33,12 @@ function loadComponents() {
 		$translated_path = "../../../Config/ID_{$lang}.tsv";
 		if (file_exists($translated_path)) {
 			$translated = $read_components($translated_path);
+			$localizedComponentIds = array();
 			$indexes = array();
 			foreach ($component as $index => $row)
 				$indexes[$row['id']] = $index;
 			foreach ($translated as $row) {
+				$localizedComponentIds[$row['id']] = true;
 				if (isset($indexes[$row['id']]))
 					$component[$indexes[$row['id']]] = $row;
 				else
@@ -42,6 +47,17 @@ function loadComponents() {
 		}
 	}
 	return $component;
+}
+
+function isComponentLocalized($id) {
+	global $lang;
+	global $localizedComponentIds;
+
+	if (!$lang || $lang === 'en')
+		return true;
+	if ($localizedComponentIds === null)
+		return true;
+	return isset($localizedComponentIds[$id]);
 }
 
 function getComponentIndex($id) {
@@ -110,8 +126,9 @@ function getPrevArticleId($id) {
 	$id_index = getComponentIndex($id);
 	$parent_id = getParentId($id);
 	for($i = $id_index - 1; $i >= 0; $i--) {
-		if(getParentId($component[$i]['id']) == $parent_id && isArticleComponent($component[$i]['id']))
-			return $component[$i]['id'];
+		$candidate_id = $component[$i]['id'];
+		if(getParentId($candidate_id) == $parent_id && isArticleComponent($candidate_id) && isComponentLocalized($candidate_id))
+			return $candidate_id;
 	}
 	return '';
 }
@@ -123,8 +140,9 @@ function getNextArticleId($id) {
 	$id_index = getComponentIndex($id);
 	$parent_id = getParentId($id);
 	for($i = $id_index + 1; $i < count($component); $i++) {
-		if(getParentId($component[$i]['id']) == $parent_id && isArticleComponent($component[$i]['id']))
-			return $component[$i]['id'];
+		$candidate_id = $component[$i]['id'];
+		if(getParentId($candidate_id) == $parent_id && isArticleComponent($candidate_id) && isComponentLocalized($candidate_id))
+			return $candidate_id;
 	}
 	return '';
 }
@@ -138,7 +156,7 @@ function getSubComponents($id) {
 	global $component;
 	$pattern = "#".$id."\/[^\/]+$#";
 	$matches = array_filter($component, function($a) use($pattern)  {
-		return preg_match($pattern, $a['id']);
+		return preg_match($pattern, $a['id']) && isComponentLocalized($a['id']);
 	});
 
 	$ary = array();
@@ -241,7 +259,7 @@ function getPrevId($id) {
 				return "";
 			else if(count($component[$i-1]) > 5 && in_array('hidden', explode(' ', strtolower($component[$i-1]['description']))))
 				$i--;
-			else if(getParentId($id) == getParentId($component[$i-1]['id']))
+			else if(getParentId($id) == getParentId($component[$i-1]['id']) && isComponentLocalized($component[$i-1]['id']))
 				return $component[$i-1]['id'];
 		}
 	}
@@ -259,7 +277,7 @@ function getNextId($id) {
 				return "";
 			else if(count($component[$i+1]) > 5 && in_array('hidden', explode(' ', strtolower($component[$i+1]['description']))))
 				$i++;
-			else if(getParentId($id) == getParentId($component[$i+1]['id']))
+			else if(getParentId($id) == getParentId($component[$i+1]['id']) && isComponentLocalized($component[$i+1]['id']))
 				return $component[$i+1]['id'];
 		}
 	}

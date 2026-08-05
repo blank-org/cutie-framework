@@ -94,7 +94,10 @@
 		continue to the homepage:
 	</p>
 	<a id='logo' href='/'>
-		<?php require '../../Resource/Logo_Full.svg' ?>
+		<?php
+			require_once '../API/IncludeSVG.php';
+			includeSVG('', 'Logo_Full');
+		?>
 	</a>
 	<a id='mail-link' href='mailto:<?php echo $webMasterId ?>?subject=<?php echo $config['project_title'] ?>-404'><?php echo $webMasterId ?></a>
 	<script>

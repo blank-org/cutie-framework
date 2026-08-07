@@ -347,16 +347,40 @@ function renderComponentBody($id) {
 	$html = ob_get_clean();
 
 	// Translations often omit the cover callout. If a cover image exists for
-	// this slug (language-specific or base fallback), inject the standard cover.
+	// this slug (language-specific or base fallback), inject the standard cover
+	// plus the description heading beneath it.
 	if ($id === 'root' || getComponentImage($id) === null)
 		return $html;
-	if (strpos($html, 'cover-image') !== false)
+
+	$has_cover = strpos($html, 'cover-image') !== false;
+	// Publisher used to inject cover alone for translations; detect a missing
+	// description title even when the cover image is already present.
+	$has_desc_heading = preg_match(
+		"/<h2\\s+class=['\"]center['\"]\\s*>/u",
+		$html
+	) === 1;
+	if ($has_cover && $has_desc_heading)
 		return $html;
+
+	$heading = "\n\t<h2 class='center'>".$desc."</h2>\n";
+	if ($has_cover) {
+		// Insert the heading immediately after the cover image container.
+		$updated = preg_replace(
+			"/<div\\s+class=['\"]content-image-container['\"]\\s*>.*?<\\/div>\\s*<\\/div>/us",
+			'$0'.$heading,
+			$html,
+			1,
+			$count
+		);
+		if ($count > 0)
+			return $updated;
+		return $html.$heading;
+	}
 
 	$alt = $desc;
 	ob_start();
 	require __DIR__.'/../HTML/Fragment/Component_cover.php';
-	echo "\n\t<h2 class='center'>".$desc."</h2>\n";
+	echo $heading;
 	$cover = ob_get_clean();
 
 	if (preg_match("/<div\\s+id=['\"]message['\"]\\s*>/", $html)) {

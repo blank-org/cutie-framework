@@ -75,10 +75,15 @@ function loadCanvas(target, title) {
 
 					var resp = JSON.parse(xmlhttp.responseText);
 					document.title = resp.desc + ' - ' + PROJECT_TITLE;
+					// Use server label so a wrong link data-title cannot stick as the H1.
+					var pageTitle = (typeof resp.label !== 'undefined') ? resp.label : title;
 					if(target == 'root')
 						updatePathTitle('', '&nbsp;', resp.prevArticle, resp.nextArticle);
-					else
-						updatePathTitle(resp.path, title, resp.prevArticle, resp.nextArticle);
+					else {
+						updatePathTitle(resp.path, pageTitle, resp.prevArticle, resp.nextArticle);
+						if(pageTitle !== title)
+							replaceState(target, pageTitle);
+					}
 					syncScrollReload(startTime, resp, target);
 				} break;
 				case 404: {

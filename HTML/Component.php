@@ -89,6 +89,9 @@
 	echo getComponentDesc($id);
 	echo "\"";
 	echo ",";
+	echo "\"label\":";
+	echo json_encode(getComponentPageLabel($id));
+	echo ",";
 	echo "\"prevArticle\":";
 	echo json_encode($prev_article);
 	echo ",";

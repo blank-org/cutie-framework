@@ -58,7 +58,9 @@ function init() {
 			replaceState('menu', '');
 		else if (URLid)
 			replaceState(URLid, document.getElementById('title').textContent);
-		// hash-only URLs (/#portfolio) keep their hash; root.js scrolls to the section.
+		else if (hashID)
+			// hash-only URLs (/#portfolio): keep hash, but attach SPA state so Back works after /work.
+			ensureHistoryState('root', '');
 	
 		menu_button.addEventListener( 'click', function() {
 			if (!menuActive) {

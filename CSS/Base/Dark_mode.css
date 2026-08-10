@@ -135,6 +135,8 @@ html.dark-mode .social .image svg path {
 }
 
 html.dark-mode #site-twitter:hover path,
+html.dark-mode #site-linkedin:hover path,
+html.dark-mode #site-x:hover path,
 html.dark-mode #site-facebook:hover path,
 html.dark-mode #site-youtube:hover svg > path {
 	fill: #69b7cf;

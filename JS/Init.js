@@ -33,7 +33,11 @@ function init() {
 	
 		if(!!hashID) {
 			curTab = 'root';
-			loadCanvas(document.getElementById(hashID));
+			// Only treat hash as a canvas deep-link when it points at an XURL control.
+			// In-page section anchors (#portfolio, #contact, …) are handled by root.js.
+			var hashEl = document.getElementById(hashID);
+			if(hashEl && hashEl.classList && hashEl.classList.contains('XURL') && hashEl.getAttribute('data-target'))
+				loadCanvasH(hashEl);
 		}
 		else if(!!URLid)
 			curTab = URLid;
@@ -52,8 +56,9 @@ function init() {
 			replaceState('root', '');
 		else if(URLid == 'menu')
 			replaceState('menu', '');
-		else
+		else if (URLid)
 			replaceState(URLid, document.getElementById('title').textContent);
+		// hash-only URLs (/#portfolio) keep their hash; root.js scrolls to the section.
 	
 		menu_button.addEventListener( 'click', function() {
 			if (!menuActive) {
@@ -90,6 +95,9 @@ function init() {
 				search_button.classList.add('header-button-active');
 				search_box.classList.remove('hide_display');
 				isSearchButtonActive = true;
+				var search_input = search_box.querySelector('input[type="search"], input[name="q"], input.gsc-input');
+				if(search_input)
+					search_input.focus();
 			}
 			else {
 				search_button.classList.remove('header-button-active');

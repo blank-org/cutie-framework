@@ -33,28 +33,36 @@ function loadCanvasH(e) {
 }
 
 function loadCanvas(target, title) {
+	if(typeof target !== 'string' || !target.length)
+		return;
 
 	curTab = target;
 	var canvas_main = document.getElementById('canvas-main');
 	var main_wrapper = document.getElementById('main-wrapper');
+	var pathContainer = document.getElementById('path-container');
+	var titleContainer = document.getElementById('title-container');
+	var pathEl = document.getElementById('path');
+	var titleEl = document.getElementById('title');
 
-	main_wrapper.classList.add('hide_path_title_updated');
-	canvas_main.classList.add('hide');
+	if(main_wrapper)
+		main_wrapper.classList.add('hide_path_title_updated');
+	if(canvas_main)
+		canvas_main.classList.add('hide');
 
 	var startTime = new Date().getTime();
 	syncScrollReload.startTime = null;
 	scrollTop();
 	initLoading();
 	if(target == 'root') {
-		document.getElementById('path-container').classList.add('hide_scale');
-		document.getElementById('title-container').classList.add('hide_scale');
+		if(pathContainer) pathContainer.classList.add('hide_scale');
+		if(titleContainer) titleContainer.classList.add('hide_scale');
 	}
 	else {
-		document.getElementById('path-container').classList.remove('hide_scale');
-		document.getElementById('title-container').classList.remove('hide_scale');
+		if(pathContainer) pathContainer.classList.remove('hide_scale');
+		if(titleContainer) titleContainer.classList.remove('hide_scale');
 	}
-	document.getElementById('path').classList.add('hide');
-	document.getElementById('title').classList.add('hide');
+	if(pathEl) pathEl.classList.add('hide');
+	if(titleEl) titleEl.classList.add('hide');
 
 	var xmlhttp = new XMLHttpRequest();
 	if(window.XMLHttpRequest) {
@@ -69,6 +77,7 @@ function loadCanvas(target, title) {
 		if (xmlhttp.readyState == 4 && xmlhttp.requestId == curRequestId) {
 			if(target === gTarget) {
 				var canvas_main = document.getElementById('canvas-main');
+				var content = document.getElementById('content');
 				switch (xmlhttp.status) {
 				case 200: {
 					endLoading();
@@ -87,12 +96,23 @@ function loadCanvas(target, title) {
 					syncScrollReload(startTime, resp, target);
 				} break;
 				case 404: {
-					canvas_main.innerHTML = "Error: 404 - Resource not found!";
+					endLoading();
+					if(content)
+						content.innerHTML = "Error: 404 - Resource not found!";
+					else if(canvas_main)
+						canvas_main.innerHTML = "Error: 404 - Resource not found!";
+					if(canvas_main)
+						canvas_main.classList.remove('hide');
 				} break;
 				case 408:
 				case 501:
 				case 502: {
-					canvas_main.innerHTML = 'Error!';
+					if(content)
+						content.innerHTML = 'Error!';
+					else if(canvas_main)
+						canvas_main.innerHTML = 'Error!';
+					if(canvas_main)
+						canvas_main.classList.remove('hide');
 					errorLoading();
 				}
 				}
@@ -142,20 +162,29 @@ function executeReload(startTime, resp, target) {
 	if(typeof reloadTimeout != 'undefined')
 		clearTimeout(reloadTimeout);
 	reloadTimeout = setTimeout( function() {
-		document.getElementById('content').innerHTML = resp.content;
-		if(typeof resp.languageSwitcher !== 'undefined') {
+		var content = document.getElementById('content');
+		var canvas_main = document.getElementById('canvas-main');
+		var languageSwitcherEl = document.getElementById('language-switcher');
+		var main_wrapper = document.getElementById('main-wrapper');
+		var nav_menu = document.getElementById('nav-menu');
+
+		if(content)
+			content.innerHTML = resp.content;
+		if(typeof resp.languageSwitcher !== 'undefined' && languageSwitcherEl) {
 			var languageSwitcherResponse = document.createElement('div');
 			languageSwitcherResponse.innerHTML = resp.languageSwitcher;
 			var languageSwitcher = languageSwitcherResponse.querySelector('#language-switcher');
-			document.getElementById('language-switcher').innerHTML = languageSwitcher ? languageSwitcher.innerHTML : '';
+			languageSwitcherEl.innerHTML = languageSwitcher ? languageSwitcher.innerHTML : '';
 		}
-		document.getElementById('canvas-main').classList.remove('hide');
-		if(!URLid == '') {
-			document.getElementById('main-wrapper').classList.remove('hide_path_title_updated');
+		if(canvas_main)
+			canvas_main.classList.remove('hide');
+		if(!URLid == '' && main_wrapper) {
+			main_wrapper.classList.remove('hide_path_title_updated');
 		}
-		var height = document.getElementById('canvas-main').scrollHeight;
-		document.getElementById('nav-menu').style.maxHeight = height+'px';
-		document.getElementById('canvas-main').style.maxHeight = null;
+		if(canvas_main && nav_menu)
+			nav_menu.style.maxHeight = canvas_main.scrollHeight+'px';
+		if(canvas_main)
+			canvas_main.style.maxHeight = null;
 		setXURL(document);
 		if(resp.async == '1')
 			initPageFunction(target);
@@ -180,6 +209,8 @@ function getArticleNavigationLabel(kind) {
 
 function updateArticleNavigationLink(linkId, article, label, noneLabel) {
 	var link = document.getElementById(linkId);
+	if(!link)
+		return;
 	if(article == null) {
 		link.classList.add('article-title-nav-disabled');
 		link.removeAttribute('href');
@@ -204,11 +235,17 @@ function updateArticleNavigationLink(linkId, article, label, noneLabel) {
 
 function updatePathTitle(path, title, prevArticle, nextArticle) {
 	setTimeout(function() {
-		document.getElementById('path').innerHTML = path;
-		document.getElementById('title').innerHTML = title;
+		var pathEl = document.getElementById('path');
+		var titleEl = document.getElementById('title');
+		if(pathEl)
+			pathEl.innerHTML = path;
+		if(titleEl)
+			titleEl.innerHTML = title;
 		updateArticleNavigationLink('article-prev', prevArticle, getArticleNavigationLabel('nav-prev'), getArticleNavigationLabel('nav-prev-none'));
 		updateArticleNavigationLink('article-next', nextArticle, getArticleNavigationLabel('nav-next'), getArticleNavigationLabel('nav-next-none'));
-		document.getElementById('path').classList.remove('hide');
-		document.getElementById('title').classList.remove('hide');
+		if(pathEl)
+			pathEl.classList.remove('hide');
+		if(titleEl)
+			titleEl.classList.remove('hide');
 	}, 300);
 }

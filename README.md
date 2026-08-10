@@ -179,6 +179,41 @@ File structure
 	            Project_title.php
 	            Sentry_exec.php
 	            Sentry_version.php
+Layout & skin (opt-in)
+----------------------
+
+Shell appearance is selected per site via `Config/Vars.tsv`. Defaults keep the classic article look for existing sites (cutie.com, samples, etc.).
+
+| Key | Values | Effect |
+|-----|--------|--------|
+| `layout` | `classic` (default), `wide` | Shell width / gutters. `wide` unlocks `.layout-rail`, `.layout-split` helpers. |
+| `skin` | `none` (default), `glass` | Shared translucent panel tokens/utilities (`.glass`, `.glass-panel`, `.glass-soft`). |
+
+Emit the attributes from the site template (Cutie templates are site-owned):
+
+```html
+<html … data-layout="<?php echo htmlspecialchars(getLayoutMode()); ?>" data-skin="<?php echo htmlspecialchars(getSkinMode()); ?>">
+```
+
+Framework CSS is gated on those attributes (`Layout_wide.css`, `Skin_glass.css`), so other sites stay unchanged until they set the keys.
+
+Site adapters
+-------------
+
+Brand-specific composition that is not useful across sites belongs in the site tree, not the framework:
+
+- Prefer `CSS/Base/adapter.css` (or similarly named Base CSS) that styles chrome using `[data-layout]` / `[data-skin]` and the shared utilities.
+- Keep marketing/landing markup and copy in site `HTML/Component/`.
+- Override site `HTML/Fragment/{Header,Menu,Footer}.php` for shell redesigns that should not affect other Cutie sites.
+- Prefer site `HTML/Fragment/GCSE.php` + `JS/Fragment/GCSE.php` when replacing Google CSE with a custom search UI (template should prefer site fragments when present).
+- Mark self-contained landing/case pages with class `no-auto-cover` so SPA cover injection is skipped without brand-specific framework checks.
+- Keep fonts, default body chrome, and CSE dark-mode rules in the framework classic defaults; override typography/colors in the site adapter.
+- Do not fork `Structure.css` / `Body.css` / `Font.css` for one brand; extend via attributes + adapter.
+
+**Branch vs disjoint framework repo:** prefer a long-lived branch on `cutie-framework` (e.g. `shell/wide`) when temporary framework API divergence is required. Point the site submodule at that branch, periodically rebase/merge from `main`, and open PRs upstream for reusable pieces. Avoid a disjoint framework repo — it makes pulling updates and sending features back much harder. Prefer site-owned chrome for radical redesigns whenever possible.
+
+This keeps the framework selectable and reusable while allowing long-lived per-site skins.
+
 Overrides
 ---------
 

@@ -21,8 +21,37 @@ function loadConfig() {
 		}
 		fclose($fHandle);
 	}
+
+	if(!isset($config['layout']) || $config['layout'] === '') {
+		$config['layout'] = 'classic';
+	}
+	if(!isset($config['skin']) || $config['skin'] === '') {
+		$config['skin'] = 'none';
+	}
 	
 	return $config;
+}
+
+/**
+ * Shell layout mode from Config/Vars.tsv `layout`.
+ * classic = article shell (default, unchanged for existing sites)
+ * wide    = modern full-bleed shell
+ */
+function getLayoutMode() {
+	global $config;
+	$layout = isset($config['layout']) ? strtolower(trim($config['layout'])) : 'classic';
+	return in_array($layout, array('classic', 'wide'), true) ? $layout : 'classic';
+}
+
+/**
+ * Visual skin from Config/Vars.tsv `skin`.
+ * none  = no shared skin utilities (default)
+ * glass = translucent panel tokens/utilities
+ */
+function getSkinMode() {
+	global $config;
+	$skin = isset($config['skin']) ? strtolower(trim($config['skin'])) : 'none';
+	return in_array($skin, array('none', 'glass'), true) ? $skin : 'none';
 }
 
 ?>

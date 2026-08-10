@@ -349,7 +349,14 @@ function renderComponentBody($id) {
 	// Translations often omit the cover callout. If a cover image exists for
 	// this slug (language-specific or base fallback), inject the standard cover
 	// plus the description heading beneath it.
+	// Skip for root and for self-contained landing pages — Template/Base.php
+	// includes those components raw (no cover), so SPA JSON must match or the
+	// injected square cover pushes the real content below the fold as an
+	// "empty" page after XURL navigation.
+	// Sites mark such pages with class="no-auto-cover" (brand-agnostic).
 	if ($id === 'root' || getComponentImage($id) === null)
+		return $html;
+	if (strpos($html, 'no-auto-cover') !== false)
 		return $html;
 
 	$has_cover = strpos($html, 'cover-image') !== false;

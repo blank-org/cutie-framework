@@ -20,8 +20,10 @@ function getHashID() {
 	var hash = window.location.hash;
 	if(hash.length == 0)
 		return '';
-	else
+	// Legacy Cutie deep-links used "#/id"; in-page section anchors use "#id".
+	if(hash.charAt(1) === '/')
 		return hash.substring(2);
+	return hash.substring(1);
 }
 
 function setXURL(node) {

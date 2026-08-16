@@ -26,6 +26,18 @@ is present, article navigation includes only same-level rows whose type is
 `article`. When it is absent, same-level component rows are treated as
 articles.
 
+Multilanguage URL scheme
+------------------------
+
+English is the default language and is served directly on the base URL. For
+example, `/path/to/page` resolves the English article in place; it is
+not redirected to `/en/path/to/page`.
+
+Non-English translations use a language prefix, for example
+`/hi/path/to/page`. If a translated component is unavailable, the
+framework falls back to the English component while retaining the requested
+language-prefixed URL. Canonical and `hreflang` metadata follow the same scheme:
+the unprefixed English URL is also the `x-default` URL.
 
 Directory structure
 -------------------

@@ -18,6 +18,28 @@ function signalDisabledArticleNavigation(link) {
 	}, 380);
 }
 
+function scrollToArticleNavigation() {
+	var navigation = document.getElementById('nav-list');
+	if(!navigation)
+		return false;
+
+	var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+	navigation.scrollIntoView({
+		behavior: reduceMotion ? 'auto' : 'smooth',
+		block: 'center'
+	});
+
+	navigation.classList.remove('nav-list-highlight');
+	void navigation.offsetWidth;
+	navigation.classList.add('nav-list-highlight');
+	if(scrollToArticleNavigation.highlightTimeout)
+		clearTimeout(scrollToArticleNavigation.highlightTimeout);
+	scrollToArticleNavigation.highlightTimeout = setTimeout(function() {
+		navigation.classList.remove('nav-list-highlight');
+	}, 2200);
+	return false;
+}
+
 function loadCanvasH(e) {
 	var target = e.getAttribute('data-target');
 	if(target == 'root')

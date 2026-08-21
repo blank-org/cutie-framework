@@ -25,18 +25,39 @@ h1#title {
 	align-items: center;
 	justify-content: center;
 	align-self: stretch;
-	flex: 1 1 0;
 	min-width: 44px;
 	background: transparent;
+	border: 0;
+	box-sizing: border-box;
+	font: inherit;
 	outline: none;
+	padding-top: 0;
+	padding-bottom: 0;
 }
 
 #article-prev {
+	flex: 1 1 0;
 	justify-content: flex-start;
 	padding-left: 40px;
 }
 
+.article-title-nav-end {
+	display: flex;
+	align-self: stretch;
+	flex: 1 1 0;
+}
+
+#article-bottom {
+	flex: 0 0 44px;
+	cursor: pointer;
+}
+
+
+#article-bottom .image {
+	transform: rotate(90deg) scale(0.88);
+}
 #article-next {
+	flex: 1 1 0;
 	justify-content: flex-end;
 	padding-right: 40px;
 }
@@ -63,6 +84,11 @@ h1#title {
 .article-title-nav:focus-visible .image {
 	opacity: 1;
 	transform: scale(1.18);
+}
+
+#article-bottom:hover .image,
+#article-bottom:focus-visible .image {
+	transform: rotate(90deg) scale(1.18);
 }
 
 .article-title-nav-disabled {

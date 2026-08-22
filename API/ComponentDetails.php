@@ -287,16 +287,20 @@ function getNextId($id) {
 function findComponentImageAt($resourceId) {
 	$bIndex;
 	$ext;
-	if(file_exists('../../Resource/'.$resourceId.'.jpg')) {
+	if(file_exists('../../Resource/'.$resourceId.'.svg')) {
+		$ext = 'svg';
+		$bIndex = false;
+	}
+	else if(file_exists('../../Resource/'.$resourceId.'/index.svg')) {
+		$ext = 'svg';
+		$bIndex = true;
+	}
+	else if(file_exists('../../Resource/'.$resourceId.'.jpg')) {
 		$ext = 'jpg';
 		$bIndex = false;
 	}
 	else if(file_exists('../../Resource/'.$resourceId.'.png')) {
 		$ext = 'png';
-		$bIndex = false;
-	}
-	else if(file_exists('../../Resource/'.$resourceId.'.svg')) {
-		$ext = 'svg';
 		$bIndex = false;
 	}
 	else if(file_exists('../../Resource/'.$resourceId.'/index.jpg')) {
@@ -305,10 +309,6 @@ function findComponentImageAt($resourceId) {
 	}
 	else if(file_exists('../../Resource/'.$resourceId.'/index.png')) {
 		$ext = 'png';
-		$bIndex = true;
-	}
-	else if(file_exists('../../Resource/'.$resourceId.'/index.svg')) {
-		$ext = 'svg';
 		$bIndex = true;
 	}
 	else {
@@ -373,7 +373,7 @@ function renderComponentBody($id) {
 	if ($has_cover) {
 		// Insert the heading immediately after the cover image container.
 		$updated = preg_replace(
-			"/<div\\s+class=['\"]content-image-container['\"]\\s*>.*?<\\/div>\\s*<\\/div>/us",
+			"/<div\\s+class=['\"]content-image-container['\"]\\s*>.*?<\\/div>\\s*<\\/div>(\\s*<p\\s+class=['\"]cover-credit['\"][\\s\\S]*?<\\/p>)?/us",
 			'$0'.$heading,
 			$html,
 			1,

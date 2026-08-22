@@ -17,3 +17,8 @@
 		<img src='/<?php echo $imageFile['url_path']; ?>' alt='<?php echo $alt ?>'>
 	</div>
 </div>
+<?php
+	$site_image_credit = dirname(__DIR__, 3).'/HTML/Fragment/Image_credit.php';
+	if(is_readable($site_image_credit))
+		require $site_image_credit;
+?>

@@ -7,7 +7,19 @@
 
 	if($imageFile['ext'] == 'svg') {
 		$svgfile = simplexml_load_file($imageFile['file_path']);
-		list($NULL, $NULL, $width, $height) = explode(' ', $svgfile['viewBox']);
+		$viewBox = preg_split('/[\s,]+/', trim((string)($svgfile['viewBox'] ?? '')));
+		if(count($viewBox) === 4 && is_numeric($viewBox[2]) && is_numeric($viewBox[3])) {
+			$width = (float)$viewBox[2];
+			$height = (float)$viewBox[3];
+		}
+		else {
+			$width = (float)preg_replace('/[^0-9.+-eE]/', '', (string)($svgfile['width'] ?? ''));
+			$height = (float)preg_replace('/[^0-9.+-eE]/', '', (string)($svgfile['height'] ?? ''));
+		}
+		if($width <= 0 || $height <= 0) {
+			$width = 1;
+			$height = 1;
+		}
 	}
 	else
 		list($width, $height, $type, $attr) = getimagesize($imageFile['file_path']);

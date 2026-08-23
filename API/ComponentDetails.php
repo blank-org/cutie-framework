@@ -404,12 +404,68 @@ function renderComponentBody($id) {
 	return $cover.$html;
 }
 
+function defaultImageDisplay($id) {
+	$ext = getItemImageFileExt($id);
+	if ($ext === 'svg')
+		return array('role' => 'tile', 'tile_fit' => 'contain', 'tile_position' => 'center');
+	return array('role' => 'hero', 'tile_fit' => 'cover', 'tile_position' => 'center');
+}
+
+function getImageDisplay($id) {
+	static $site_loaded = false;
+	if (!$site_loaded) {
+		$site_loaded = true;
+		$site_path = dirname(__DIR__, 2).'/HTML/Fragment/Image_display.php';
+		if (is_readable($site_path))
+			require_once $site_path;
+	}
+
+	$display = defaultImageDisplay($id);
+	$row = function_exists('siteImageDisplayRow') ? siteImageDisplayRow($id) : null;
+	$fit_overridden = false;
+	if (is_array($row)) {
+		foreach (array('role', 'tile_fit', 'tile_position') as $key) {
+			$value = trim((string)($row[$key] ?? ''));
+			if ($value === '')
+				continue;
+			$display[$key] = $value;
+			if ($key === 'tile_fit')
+				$fit_overridden = true;
+		}
+	}
+	$display['role'] = ($display['role'] === 'tile') ? 'tile' : 'hero';
+	if ($display['role'] === 'tile' && !$fit_overridden)
+		$display['tile_fit'] = 'contain';
+	$display['tile_fit'] = ($display['tile_fit'] === 'contain') ? 'contain' : 'cover';
+	if (!preg_match('/^[A-Za-z0-9.%\s-]+$/', (string)$display['tile_position']))
+		$display['tile_position'] = 'center';
+	return $display;
+}
+
+function itemBlockImageClass($id, $extra = '') {
+	$display = getImageDisplay($id);
+	$classes = array('item_block_image');
+	if ($extra !== '')
+		$classes[] = $extra;
+	if ($extra !== 'item_block_image_hidden' && $display['tile_fit'] === 'contain')
+		$classes[] = 'item_block_image_contain';
+	return implode(' ', $classes);
+}
+
+function itemBlockImageStyle($id) {
+	$position = getImageDisplay($id)['tile_position'];
+	if ($position === '' || strcasecmp($position, 'center') === 0)
+		return '';
+	return 'object-position: '.htmlspecialchars($position, ENT_QUOTES, 'UTF-8');
+}
+
 function getComponentMetaImage($id) {
 	$imageFile = getComponentImage($id);
 	if ($imageFile == null || $id == 'root' || $imageFile['ext'] == 'svg')
 		return "social.png";
-	else
-		return $imageFile['url_path'];
+	if (getImageDisplay($id)['role'] === 'tile')
+		return "social.png";
+	return $imageFile['url_path'];
 }
 
 function getItemImageFilePath($id) {

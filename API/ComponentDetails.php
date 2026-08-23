@@ -317,7 +317,9 @@ function findComponentImageAt($resourceId) {
 
 	$arr = array();
 	$arr['file_path'] = '../../Resource/'.$resourceId.($bIndex? '/index' : '').'.'.$ext;
-	$arr['url_path'] = $resourceId.($bIndex? '/index' : '').'.'.$ext;
+	// Canonical public URL is /{slug}.jpg (or .svg/.png). On disk the file may
+	// still live as Resource/{slug}/index.jpg; Apache and baked .htaccess map it.
+	$arr['url_path'] = $resourceId.'.'.$ext;
 	$arr['ext'] = $ext;
 
 	return $arr;

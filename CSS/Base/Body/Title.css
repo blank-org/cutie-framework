@@ -14,7 +14,10 @@ div#title-container {
 h1#title {
 	display: inline-block;
 	flex: 0 1 auto;
+	min-width: 0;
+	margin: 0;
 	max-width: calc(100% - 144px);
+	text-align: center;
 	white-space: nowrap;
 	transition: all 0.3s;
 	will-change: opacity, scaleY;
@@ -35,16 +38,21 @@ h1#title {
 	padding-bottom: 0;
 }
 
+.article-title-nav-start,
+.article-title-nav-end {
+	display: flex;
+	align-items: stretch;
+	align-self: stretch;
+	box-sizing: border-box;
+	flex: 1 1 0;
+	min-width: 0;
+}
+
 #article-prev {
 	flex: 1 1 0;
 	justify-content: flex-start;
+	min-width: 0;
 	padding-left: 40px;
-}
-
-.article-title-nav-end {
-	display: flex;
-	align-self: stretch;
-	flex: 1 1 0;
 }
 
 #article-bottom {
@@ -52,13 +60,14 @@ h1#title {
 	cursor: pointer;
 }
 
-
 #article-bottom .image {
 	transform: rotate(90deg) scale(0.88);
 }
+
 #article-next {
 	flex: 1 1 0;
 	justify-content: flex-end;
+	min-width: 0;
 	padding-right: 40px;
 }
 

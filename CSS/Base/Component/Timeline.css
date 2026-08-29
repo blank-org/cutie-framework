@@ -2,6 +2,10 @@
 	padding-top: 8px
 }
 
-#content-timeline .date {
-	font-family: consolas
+#content-timeline .date,
+#message .content-list .date {
+	font-family: consolas, ui-monospace, monospace;
+	display: inline-block;
+	min-width: 11ch;
+	text-align: right
 }

@@ -15,4 +15,20 @@ Sentry.init({
       // plus for 100% of sessions with an error
       replaysSessionSampleRate: 1.0,
       replaysOnErrorSampleRate: 1.0,
+
+      ignoreErrors: [
+        'this.i.at is not a function',
+        't.entries.at is not a function',
+        'Network Error',
+        'NetworkError',
+        'Failed to fetch',
+        'Load failed',
+      ],
+
+      denyUrls: [
+        /beacon\.min\.js/,
+        /cdn-cgi\/rum/,
+        /extensions\//i,
+        /^chrome:\/\//i,
+      ],
 });

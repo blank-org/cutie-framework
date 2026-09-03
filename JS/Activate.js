@@ -17,6 +17,7 @@ var activateMenuFn = function() {
 		height = frameHeight;
 	document.getElementById('canvas-main').style.maxHeight = height+'px';
 	document.getElementById('nav-menu').style.maxHeight = null;
+	document.getElementById('nav-menu').style.minHeight = height+'px';
 	menuActive = true;
 	if(!(typeof (ga) === 'undefined')) {
 		ga('set', 'page', '/'+'menu');

@@ -203,8 +203,10 @@ function executeReload(startTime, resp, target) {
 		if(!URLid == '' && main_wrapper) {
 			main_wrapper.classList.remove('hide_path_title_updated');
 		}
-		if(canvas_main && nav_menu)
+		if(canvas_main && nav_menu) {
 			nav_menu.style.maxHeight = canvas_main.scrollHeight+'px';
+			nav_menu.style.minHeight = canvas_main.scrollHeight+'px';
+		}
 		if(canvas_main)
 			canvas_main.style.maxHeight = null;
 		setXURL(document);

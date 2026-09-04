@@ -360,6 +360,10 @@ function renderComponentBody($id) {
 		return $html;
 	if (strpos($html, 'no-auto-cover') !== false)
 		return $html;
+	// Image_display role=none disables the page cover (index image) while
+	// leaving menu tiles / Resource files available.
+	if (getImageDisplay($id)['role'] === 'none')
+		return $html;
 
 	$has_cover = strpos($html, 'cover-image') !== false;
 	// Publisher used to inject cover alone for translations; detect a missing
@@ -433,7 +437,13 @@ function getImageDisplay($id) {
 				$fit_overridden = true;
 		}
 	}
-	$display['role'] = ($display['role'] === 'tile') ? 'tile' : 'hero';
+	$role = strtolower((string)$display['role']);
+	if ($role === 'none' || $role === 'hidden')
+		$display['role'] = 'none';
+	elseif ($role === 'tile')
+		$display['role'] = 'tile';
+	else
+		$display['role'] = 'hero';
 	if ($display['role'] === 'tile' && !$fit_overridden)
 		$display['tile_fit'] = 'contain';
 	$display['tile_fit'] = ($display['tile_fit'] === 'contain') ? 'contain' : 'cover';
@@ -463,7 +473,8 @@ function getComponentMetaImage($id) {
 	$imageFile = getComponentImage($id);
 	if ($imageFile == null || $id == 'root' || $imageFile['ext'] == 'svg')
 		return "social.png";
-	if (getImageDisplay($id)['role'] === 'tile')
+	$meta_role = getImageDisplay($id)['role'];
+	if ($meta_role === 'tile' || $meta_role === 'none')
 		return "social.png";
 	return $imageFile['url_path'];
 }

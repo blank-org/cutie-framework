@@ -3,6 +3,11 @@
 #header-wrapper {
 	display: flow-root;
 }
+#header-wrapper::after {
+	content: '';
+	display: table;
+	clear: both;
+}
 #header-logo {
 	width: 50%;
 	float: right;

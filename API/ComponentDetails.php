@@ -477,9 +477,17 @@ function getItemImageFilePath($id) {
 function getItemImageFileURL($id) {
 	$imageFile = getComponentImage($id);
 	if($imageFile != null)
-		return '/'.$imageFile['url_path'];
+		return imageUrlWithCacheBust($imageFile);
 	else
 		return "/resource/placeholder.svg";
+}
+
+function imageUrlWithCacheBust($imageFile) {
+	$path = '/'.$imageFile['url_path'];
+	$mtime = @filemtime($imageFile['file_path']);
+	if($mtime)
+		$path .= '?v='.$mtime;
+	return $path;
 }
 
 function getItemImageFileExt($id) {

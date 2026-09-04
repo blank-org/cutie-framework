@@ -7,7 +7,7 @@
 
 	$display = getImageDisplay($id);
 	$alt_text = htmlspecialchars($alt ?? '', ENT_QUOTES, 'UTF-8');
-	$src = htmlspecialchars($imageFile['url_path'], ENT_QUOTES, 'UTF-8');
+	$src = htmlspecialchars(ltrim(imageUrlWithCacheBust($imageFile), '/'), ENT_QUOTES, 'UTF-8');
 
 	if($display['role'] === 'tile') {
 		$fit = htmlspecialchars($display['tile_fit'], ENT_QUOTES, 'UTF-8');

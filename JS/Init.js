@@ -47,12 +47,7 @@ function init() {
 		if(URLid == 'menu') {
 			menuActive = true;
 			menu_button.classList.add('active');
-			var menuHeight = document.querySelector('#nav-menu').scrollHeight;
-			var frameHeight = document.querySelector('#canvas-wrapper-inner-container').clientHeight;
-			if(menuHeight < frameHeight)
-				menuHeight = frameHeight;
-			canvas_main.style.maxHeight = menuHeight+'px';
-			document.querySelector('#nav-menu').style.minHeight = menuHeight+'px';
+			applyMenuFrameHeight(getMenuFrameHeight(), false);
 		}
 		else {
 			document.querySelector('#nav-menu').style.maxHeight = canvas_main.scrollHeight+'px';
@@ -75,9 +70,7 @@ function init() {
 			}
 			else {
 				activateMain();
-				canvas_main.style.maxHeight = null;
-				document.querySelector('#nav-menu').style.maxHeight = canvas_main.scrollHeight+'px';
-				document.querySelector('#nav-menu').style.minHeight = canvas_main.scrollHeight+'px';
+				restorePageFrameHeight();
 			}
 		} );
 	

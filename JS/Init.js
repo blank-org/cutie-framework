@@ -22,8 +22,7 @@ function init() {
 		var hashID = getHashID();
 		URLid = getURLid();
 	
-		var canvas_main = document.querySelector('#canvas-main'),
-			menu_button = document.querySelector('.toggle-push-left'),
+		var menu_button = document.querySelector('.toggle-push-left'),
 			menu_items = document.querySelectorAll('.XURL'),
 			header_button = document.querySelector('#header_button'),
 			translate_button = document.querySelector('#translate-button'),
@@ -47,11 +46,7 @@ function init() {
 		if(URLid == 'menu') {
 			menuActive = true;
 			menu_button.classList.add('active');
-			applyMenuFrameHeight(getMenuFrameHeight(), false);
-		}
-		else {
-			document.querySelector('#nav-menu').style.maxHeight = canvas_main.scrollHeight+'px';
-			document.querySelector('#nav-menu').style.minHeight = canvas_main.scrollHeight+'px';
+			document.getElementById('main-wrapper').classList.add('pml-settled');
 		}
 	
 		if (!hashID && !URLid)
@@ -69,8 +64,8 @@ function init() {
 				activateMenu();
 			}
 			else {
+				fadeFooterAfterPageSlide();
 				activateMain();
-				restorePageFrameHeight();
 			}
 		} );
 	

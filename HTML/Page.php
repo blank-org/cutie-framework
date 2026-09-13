@@ -11,7 +11,7 @@
 		$id = "root";
 	$menu_active_class;
 	if($id == "menu") {
-		$menu_active_class = "pml-open";
+		$menu_active_class = "pml-open pml-settled";
 		$id = "root";
 	}
 	

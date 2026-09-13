@@ -5,8 +5,8 @@
 	width: 50%;
 	transform: translateX(-100%);
 	display: flex;
-	float: left;
-	transition: all 0.7s;
+	flex: 0 0 50%;
+	transition: transform 0.7s;
 	will-change: transform;
 }
 

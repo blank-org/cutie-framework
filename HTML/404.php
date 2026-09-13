@@ -1,7 +1,8 @@
 <?php
 	require_once '../API/Pre.php';
 	$config = loadConfig();
-	$webMasterId = 'webmaster'.'@'.$config['site_domain'];
+	$mailUser = 'webmaster';
+	$mailDomain = $config['site_domain'];
 ?>
 <!DOCTYPE html>
 <html xmlns='http://www.w3.org/1999/xhtml' lang='en'>
@@ -75,6 +76,10 @@
 		margin-right: auto;
 		display: block;
 	}
+	.mail-obf {
+		direction: rtl;
+		unicode-bidi: bidi-override;
+	}
 	</style>
 </head>
 <body>
@@ -99,8 +104,17 @@
 			includeSVG('', 'Logo_Full');
 		?>
 	</a>
-	<a id='mail-link' href='mailto:<?php echo $webMasterId ?>?subject=<?php echo $config['project_title'] ?>-404'><?php echo $webMasterId ?></a>
+	<a id='mail-link' class='mail-link' href='#' data-u='<?php echo htmlspecialchars($mailUser, ENT_QUOTES); ?>' data-d='<?php echo htmlspecialchars($mailDomain, ENT_QUOTES); ?>' data-s='<?php echo htmlspecialchars($config['project_title'].'-404', ENT_QUOTES); ?>'><span class='mail-obf'><?php echo htmlspecialchars(strrev($mailUser.'@'.$mailDomain)); ?></span></a>
 	<script>
+		(function() {
+			var link = document.getElementById('mail-link');
+			if(!link)
+				return;
+			var address = (link.getAttribute('data-u') || '') + '@' + (link.getAttribute('data-d') || '');
+			var subject = link.getAttribute('data-s');
+			link.textContent = address;
+			link.href = 'mailto:' + address + (subject ? '?subject=' + encodeURIComponent(subject) : '');
+		})();
 		document.getElementById('url').innerHTML = window.location.href;
 	</script>
 </body>

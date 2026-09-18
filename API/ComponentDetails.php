@@ -60,6 +60,16 @@ function isComponentLocalized($id) {
 	return isset($localizedComponentIds[$id]);
 }
 
+function componentExists($id) {
+	global $component;
+
+	for($i = 0; $i < count($component); $i++) {
+		if($component[$i]['id'] == $id)
+			return true;
+	}
+	return false;
+}
+
 function getComponentIndex($id) {
 	global $component;
 	
@@ -83,6 +93,8 @@ function getComponentPageLabel($id) {
 
 function isComponentExternRoot($id) {
 	global $component;
+	if(!componentExists($id))
+		return false;
 	$id_index = getComponentIndex($id);
 	$flags = $component[$id_index]['flags'] ?? '';
 	return ( $id == 'root' && in_array('external', explode(' ', strtolower($flags))));
@@ -211,10 +223,12 @@ function getComponentPathStylized($id) {
 	array_pop($x);
 	foreach ($x as $value) {
 		$idStack = $idStack.$value;
-		$entry = array();
-		$entry[] = $idStack;
-		$entry[] = getComponentLabel($idStack);
-		array_push($pathStack, $entry);
+		if(componentExists($idStack)) {
+			$entry = array();
+			$entry[] = $idStack;
+			$entry[] = getComponentLabel($idStack);
+			array_push($pathStack, $entry);
+		}
 		$idStack = $idStack."/";	
 	}
 	return $pathStack;
@@ -246,6 +260,15 @@ function getParentId($id) {
 		return "root";
 	else
 		return $parentId;
+}
+
+function getNearestExistingParentId($id) {
+	$parentId = getParentId($id);
+	while($parentId !== '' && $parentId !== 'root' && !componentExists($parentId))
+		$parentId = getParentId($parentId);
+	if($parentId === '')
+		return 'root';
+	return $parentId;
 }
 
 function getPrevId($id) {

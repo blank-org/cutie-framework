@@ -3,12 +3,16 @@
 	$SUPPORTED_LANGUAGES = ['hi', 'hi-in'];
 
 	function getOrigCall_raw() {
-		if(strlen($_SERVER['QUERY_STRING']) == 0)
-			return (substr($_SERVER['REQUEST_URI'], 1));
-		else {
-			$pos = strpos($_SERVER['REQUEST_URI'], $_SERVER['QUERY_STRING']);
-			return (substr($_SERVER['REQUEST_URI'], 1, $pos - 2));
-		}
+		$uri = $_SERVER['REQUEST_URI'] ?? '';
+		$path = parse_url($uri, PHP_URL_PATH);
+		if (is_string($path) && $path !== '')
+			return ltrim($path, '/');
+		if (strlen($_SERVER['QUERY_STRING'] ?? '') == 0)
+			return (substr($uri, 1));
+		$pos = strpos($uri, $_SERVER['QUERY_STRING']);
+		if ($pos === false)
+			return ltrim($uri, '/');
+		return (substr($uri, 1, $pos - 2));
 	}
 
 	function getLanguage() {

@@ -1,6 +1,6 @@
 <?php
 	$prevId = getPrevId($id);
-	$parentId = getParentId($id);
+	$parentId = getNearestExistingParentId($id);
 	$nextId = getNextId($id);
 ?>
 <div id='nav-list' class='center page-list'>

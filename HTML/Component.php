@@ -20,7 +20,9 @@
 	$lang = getLanguage();
 	$component = loadComponents();
 
-	$id = substr(getOrigCall(), 0, -5); //stripping extension part
+	$id = getOrigCall();
+	if (substr($id, -5) === '.json' || substr($id, -5) === '.html')
+		$id = substr($id, 0, -5);
 	$file = getComponentPath($id);
 	$desc = getComponentDesc($id);
 	$date = getFileDate($file);

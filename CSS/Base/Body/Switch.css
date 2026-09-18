@@ -3,7 +3,16 @@
 }
 
 .hide {
-	transition: all 0.3s;
+	transition: opacity 0.3s;
+}
+
+#footer-wrapper {
+	transition: opacity 0.3s, transform 0.3s;
+}
+
+#footer-wrapper.hide {
+	opacity: 0;
+	transform: translateY(2.5rem);
 }
 
 .pml-open #canvas-main.hide {

@@ -1,3 +1,13 @@
+/* Contain header floats without clipping #theme-menu (position:absolute).
+   overflow:hidden also contained floats but clipped the theme dropdown. */
+#header-wrapper {
+	display: flow-root;
+}
+#header-wrapper::after {
+	content: '';
+	display: table;
+	clear: both;
+}
 #header-logo {
 	width: 50%;
 	float: right;

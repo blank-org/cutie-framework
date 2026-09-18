@@ -24,10 +24,6 @@ html[data-layout="wide"] #header-wrapper {
 	right: var(--layout-gutter);
 }
 
-html[data-layout="wide"] #wrapper {
-	padding-bottom: 168px;
-}
-
 /* Wider reading/content column than the classic 80%/10% article gutters */
 html[data-layout="wide"] .message_left_div,
 html[data-layout="wide"] .message_right_div,

@@ -188,7 +188,6 @@ function executeReload(startTime, resp, target) {
 		var canvas_main = document.getElementById('canvas-main');
 		var languageSwitcherEl = document.getElementById('language-switcher');
 		var main_wrapper = document.getElementById('main-wrapper');
-		var nav_menu = document.getElementById('nav-menu');
 
 		if(content)
 			content.innerHTML = resp.content;
@@ -203,12 +202,6 @@ function executeReload(startTime, resp, target) {
 		if(!URLid == '' && main_wrapper) {
 			main_wrapper.classList.remove('hide_path_title_updated');
 		}
-		if(canvas_main && nav_menu) {
-			nav_menu.style.maxHeight = canvas_main.scrollHeight+'px';
-			nav_menu.style.minHeight = canvas_main.scrollHeight+'px';
-		}
-		if(canvas_main)
-			canvas_main.style.maxHeight = null;
 		setXURL(document);
 		if(resp.async == '1')
 			initPageFunction(target);

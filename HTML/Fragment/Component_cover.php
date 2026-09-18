@@ -6,8 +6,11 @@
 	}
 
 	$display = getImageDisplay($id);
+	if($display['role'] === 'none')
+		return;
+
 	$alt_text = htmlspecialchars($alt ?? '', ENT_QUOTES, 'UTF-8');
-	$src = htmlspecialchars($imageFile['url_path'], ENT_QUOTES, 'UTF-8');
+	$src = htmlspecialchars(ltrim(imageUrlWithCacheBust($imageFile), '/'), ENT_QUOTES, 'UTF-8');
 
 	if($display['role'] === 'tile') {
 		$fit = htmlspecialchars($display['tile_fit'], ENT_QUOTES, 'UTF-8');

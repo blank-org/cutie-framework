@@ -22,8 +22,7 @@ function init() {
 		var hashID = getHashID();
 		URLid = getURLid();
 	
-		var canvas_main = document.querySelector('#canvas-main'),
-			menu_button = document.querySelector('.toggle-push-left'),
+		var menu_button = document.querySelector('.toggle-push-left'),
 			menu_items = document.querySelectorAll('.XURL'),
 			header_button = document.querySelector('#header_button'),
 			translate_button = document.querySelector('#translate-button'),
@@ -47,16 +46,7 @@ function init() {
 		if(URLid == 'menu') {
 			menuActive = true;
 			menu_button.classList.add('active');
-			var menuHeight = document.querySelector('#nav-menu').scrollHeight;
-			var frameHeight = document.querySelector('#canvas-wrapper-inner-container').clientHeight;
-			if(menuHeight < frameHeight)
-				menuHeight = frameHeight;
-			canvas_main.style.maxHeight = menuHeight+'px';
-			document.querySelector('#nav-menu').style.minHeight = menuHeight+'px';
-		}
-		else {
-			document.querySelector('#nav-menu').style.maxHeight = canvas_main.scrollHeight+'px';
-			document.querySelector('#nav-menu').style.minHeight = canvas_main.scrollHeight+'px';
+			document.getElementById('main-wrapper').classList.add('pml-settled');
 		}
 	
 		if (!hashID && !URLid)
@@ -74,10 +64,8 @@ function init() {
 				activateMenu();
 			}
 			else {
+				fadeFooterAfterPageSlide();
 				activateMain();
-				canvas_main.style.maxHeight = null;
-				document.querySelector('#nav-menu').style.maxHeight = canvas_main.scrollHeight+'px';
-				document.querySelector('#nav-menu').style.minHeight = canvas_main.scrollHeight+'px';
 			}
 		} );
 	

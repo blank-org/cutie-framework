@@ -166,7 +166,8 @@ function getComponentModeASYNC($id) {
 
 function getSubComponents($id) {
 	global $component;
-	$pattern = "#".$id."\/[^\/]+$#";
+		// Anchor at start so parent "computer" does not match "technology/computer/...".
+	$pattern = "#^".preg_quote($id, '#')."\/[^\/]+$#";
 	$matches = array_filter($component, function($a) use($pattern)  {
 		return preg_match($pattern, $a['id']) && isComponentLocalized($a['id']);
 	});

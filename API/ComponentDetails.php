@@ -179,6 +179,30 @@ function getSubComponents($id) {
 	return $ary;
 }
 
+function getNextTreeArticleId($id) {
+	global $component;
+	// Walk the published, localized hierarchy in the same sibling order as ID.tsv.
+	// Once a leaf is reached, continue through its ancestors' next siblings.
+	$children = array();
+	foreach ($component as $row) {
+		$child_id = $row['id'];
+		if (!isComponentLocalized($child_id)) continue;
+		$parent = getParentId($child_id);
+		$children[$parent][] = $child_id;
+	}
+	$seen = false;
+	$visit = function($parent) use (&$visit, &$seen, $id, $children) {
+		foreach ($children[$parent] ?? array() as $child_id) {
+			if ($seen && isArticleComponent($child_id)) return $child_id;
+			if ($child_id === $id) $seen = true;
+			$next = $visit($child_id);
+			if ($next !== '') return $next;
+		}
+		return '';
+	};
+	return $visit('root');
+}
+
 function resolveComponentFile($base) {
 	// Prefer directory/index.* when the index actually exists. An empty
 	// directory must not shadow a sibling flat file (e.g. root/ vs Root.php).

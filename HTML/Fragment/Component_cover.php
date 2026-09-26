@@ -1,7 +1,6 @@
 <?php
 	$imageFile = getComponentImage($id);
 	if($imageFile == null) {
-		echo "&lt; Exception: no cover image &gt;";
 		return;
 	}
 

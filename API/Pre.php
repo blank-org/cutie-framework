@@ -19,6 +19,7 @@
 	}
 
 	$config = loadConfig();
+	$bFull = isset($_GET['full']) && $_GET['full'] === 'true';
 
 	$lang = getLanguage();
 	$id = getOrigCall();

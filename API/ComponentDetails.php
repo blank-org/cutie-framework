@@ -14,9 +14,7 @@ function loadComponents() {
 		$rows = array();
 		while(($tsvLine = fgetcsv($fHandle, 0, "\t", "\"", "\\")) !== FALSE) {
 			if($tsvLine[0] == "draft") {
-				if($bFull)
-					array_shift($tsvLine);
-				else
+				if(!$bFull)
 					continue;
 			}
 			$row = array();

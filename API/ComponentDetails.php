@@ -179,8 +179,7 @@ function getSubComponents($id) {
 
 function getNextTreeArticleId($id) {
 	global $component;
-	// Walk the published, localized hierarchy in the same sibling order as ID.tsv.
-	// Once a leaf is reached, continue through its ancestors' next siblings.
+	// Search only below this component, preserving the sibling order in ID.tsv.
 	$children = array();
 	foreach ($component as $row) {
 		$child_id = $row['id'];
@@ -188,17 +187,15 @@ function getNextTreeArticleId($id) {
 		$parent = getParentId($child_id);
 		$children[$parent][] = $child_id;
 	}
-	$seen = false;
-	$visit = function($parent) use (&$visit, &$seen, $id, $children) {
+	$visit = function($parent) use (&$visit, $children) {
 		foreach ($children[$parent] ?? array() as $child_id) {
-			if ($seen && isArticleComponent($child_id)) return $child_id;
-			if ($child_id === $id) $seen = true;
+			if (isArticleComponent($child_id)) return $child_id;
 			$next = $visit($child_id);
 			if ($next !== '') return $next;
 		}
 		return '';
 	};
-	return $visit('root');
+	return $visit($id);
 }
 
 function resolveComponentFile($base) {

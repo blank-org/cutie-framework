@@ -85,8 +85,14 @@ function getComponentPageLabel($id) {
 	// If description contains 'hide_title' (case-insensitive) then return empty label
 	if(count($component[$id_index]) > 5 && in_array('hide_title', explode(' ', strtolower($component[$id_index]['description']))))
 		return '';
-	else
-		return $componentPageLabel;
+	// Top-level topic articles use their full title as the page heading;
+	// their shorter label is reserved for navigation tiles.
+	if (isArticleComponent($id) && substr_count($id, '/') === 1) {
+		$title = getComponentTitle($id);
+		if ($title !== '' && $title !== '0')
+			return $title;
+	}
+	return $componentPageLabel;
 }
 
 function isComponentExternRoot($id) {

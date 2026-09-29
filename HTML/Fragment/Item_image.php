@@ -21,18 +21,20 @@
 	};
 
 	function item_image($target, $title, $external) {
+		$full_title = componentExists($target) ? getComponentTitle($target) : $title;
+		$hover_title = htmlspecialchars($full_title, ENT_QUOTES, 'UTF-8');
 ?>
 <a
 <?php
 		$imagePath = getItemImageFileURL($target);
 		if($external != null) {
 ?>
-	class='item_block_container' href='<?php echo $external ?>' target='_blank' onclick="trackOutboundLink('<?php echo getTitleLabel($title) ?>','<?php echo $external ?>'); return false;">
+	class='item_block_container' href='<?php echo $external ?>' target='_blank' title='<?php echo $hover_title ?>' onclick="trackOutboundLink('<?php echo getTitleLabel($title) ?>','<?php echo $external ?>'); return false;">
 <?php
 		}
 		else {
 ?>
-	class='XURL item_block_container' href='<?php echo getComponentURL($target) ?>' data-target='<?php echo $target ?>' data-title='<?php echo $title ?>'>
+	class='XURL item_block_container' href='<?php echo getComponentURL($target) ?>' data-target='<?php echo $target ?>' data-title='<?php echo $title ?>' title='<?php echo $hover_title ?>' aria-label='<?php echo $hover_title ?>'>
 <?php	
 		}
 ?><img class='<?php echo itemBlockImageClass($target, 'item_block_image_visible') ?>'<?php $item_style = itemBlockImageStyle($target); if($item_style !== '') echo " style='".$item_style."'"; ?> src='<?php echo $imagePath ?>' loading='lazy' alt="Navigation - link to <?php echo $target ?>"><div class='item_block_text'><div><?php echo getTitleLabel($title) ?></div><?php if($external) { ?><div class='external'><img src='/resource/external.svg' loading='lazy' alt="Navigation - link to <?php echo $target ?>"></div><?php } ?></div></a><?php

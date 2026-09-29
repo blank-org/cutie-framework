@@ -7,14 +7,16 @@
 */
 
 var trackOutboundLink = function(title, url) {
-	if(!(typeof (ga) === 'undefined')) {
-			if(!(typeof (title) === 'undefined'))
+	if(typeof ga !== 'undefined') {
+		try {
+			if(typeof title === 'undefined')
 				title = url;
 			ga('send', 'event', 'outbound', 'click', title, {
-				'transport': 'beacon',
-			'hitCallback': function(){document.location = url;}
-		});
+				'transport': 'beacon'
+			});
+		} catch(e) {}
 	}
+	return true;
 }
 
 </script>

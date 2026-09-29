@@ -29,7 +29,7 @@
 		$imagePath = getItemImageFileURL($target);
 		if($external != null) {
 ?>
-	class='item_block_container' href='<?php echo $external ?>' target='_blank' title='<?php echo $hover_title ?>' onclick="trackOutboundLink('<?php echo getTitleLabel($title) ?>','<?php echo $external ?>'); return false;">
+	class='item_block_container' href='<?php echo $external ?>' target='_blank' rel='noopener' title='<?php echo $hover_title ?>' onclick="trackOutboundLink('<?php echo getTitleLabel($title) ?>','<?php echo $external ?>');">
 <?php
 		}
 		else {

@@ -23,3 +23,7 @@
 #nav-menu .sidebar-nav-group + .sidebar-nav-group {
 	margin-top: 24px;
 }
+
+#nav-menu_container {
+	padding-bottom: 72px;
+}

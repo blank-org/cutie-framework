@@ -51,6 +51,10 @@
 		padding-left: 12px!important
 	}
 
+	#nav-menu_container {
+		padding-bottom: 110px;
+	}
+
 }
 
 @media (max-width: 768px) {

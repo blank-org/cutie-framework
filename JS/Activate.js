@@ -83,6 +83,7 @@ var activateMenuFn = function() {
 var activateMenu = function() {
     // Update URL to /menu when user opens the menu
     recordState('menu', '');
+    scrollTop();
     activateMenuFn();
 }
 

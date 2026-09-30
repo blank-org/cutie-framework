@@ -1,9 +1,1 @@
-@media (max-width: 400px) {
-	.sidebar-nav-norm.item_block-placeholder {
-		display: none;
-	}
-	.sidebar-nav-norm.item_block-placeholder:first-of-type {
-		display: inline-block;
-		height: 40px !important;
-	}
-}
+/* Narrow layout placeholder spacing is handled in Item.css and Media.css */

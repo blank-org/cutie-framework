@@ -158,3 +158,17 @@
 .sidebar-nav-group.page-list > .item_block_container, .sidebar-nav-group.page-list > .item_block {
 	margin: 8px 10px !important;
 }
+
+.sidebar-nav-group.page-list > .item_block-placeholder {
+	display: inline-block !important;
+	width: 158px !important;
+	margin: 0 10px !important;
+	height: 0 !important;
+	padding: 0 !important;
+	border: none !important;
+	visibility: hidden !important;
+	line-height: 0 !important;
+	font-size: 0 !important;
+	pointer-events: none !important;
+}
+

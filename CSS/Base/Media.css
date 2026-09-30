@@ -44,11 +44,24 @@
 	}
 
 	#home-menu {
-		padding-left: 0!important
+		padding-left: 0!important;
 	}
 
-	#home-menu > div.sidebar-nav-group {
-		padding-left: 12px!important
+	#nav-menu .sidebar-nav-group,
+	#home-menu .sidebar-nav-group {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center !important;
+		padding-left: 0 !important;
+	}
+
+	.sidebar-nav-group.page-list > .item_block_container,
+	.sidebar-nav-group.page-list > .item_block {
+		margin: 8px 6px !important;
+	}
+
+	.sidebar-nav-group.page-list > .item_block-placeholder {
+		margin: 0 6px !important;
 	}
 
 	#nav-menu_container {

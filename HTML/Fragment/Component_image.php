@@ -1,12 +1,12 @@
 <?php
 	global $lang;
 	$imageUrlPath = $id.'/'.$img_title.'.'.$ext;
-	$imageFileName = '../../Resource/'.$imageUrlPath;
+	$imageFileName = __DIR__ . '/../../../Resource/'.$imageUrlPath;
 	$darkImageUrlPath = isset($img_dark_title) ? $id.'/'.$img_dark_title.'.'.$ext : null;
 	// Prefer a language-specific asset when present; otherwise use the base image.
 	if ($lang && $lang !== 'en') {
 		$localizedUrlPath = $lang.'/'.$id.'/'.$img_title.'.'.$ext;
-		$localizedFileName = '../../Resource/'.$localizedUrlPath;
+		$localizedFileName = __DIR__ . '/../../../Resource/'.$localizedUrlPath;
 		if (file_exists($localizedFileName)) {
 			$imageUrlPath = $localizedUrlPath;
 			$imageFileName = $localizedFileName;
@@ -34,7 +34,7 @@
 	}
 
 	if($width <= 0 || $height <= 0) {
-		$placeholderFile = '../../Resource/placeholder.svg';
+		$placeholderFile = __DIR__ . '/../../../Resource/placeholder.svg';
 		$imageUrlPath = 'resource/placeholder.svg';
 		$ext = 'svg';
 		$width = 160;
